@@ -1,0 +1,42 @@
+#!/bin/sh
+# Prime Mover build script
+#
+# © 2006 David Given.
+# Prime Mover is licensed under the MIT open source license. To get the full
+# license text, see the README file.
+#
+# $Id$
+
+set -e
+
+TEMPFILE=/tmp/build.$$
+
+embed() {
+	cat > $TEMPFILE
+	echo "XXXXSTART$1"
+	wc -c $TEMPFILE | cut -d' ' -f1
+	cat $TEMPFILE
+	echo ""
+}
+
+make_interpreter() {
+	cd lua
+	lua ../build-tools/collapse.lua *.c | cobfusc -dem
+}
+
+make_pm() {
+	echo "Making $3..."
+	(
+		sed -e "s!%%%EXTRACTOR%%%!$2!" < src/shell
+		cat src/pm | sh -c "$1" | embed script
+		make_interpreter | sh -c "$1" | embed interpreter
+	) > $3
+	chmod a+rx $3
+}
+
+#make_pm "cat" "cat" "pm_uncompressed"
+make_pm "gzip -9c" "zcat" "pm_8bit"
+make_pm "gzip -9c | uuencode out" "uudecode -o /dev/stdout | zcat" "pm_7bit"
+#echo "Making pm_standalone"
+#cp src/pm pm_standalone
+#chmod a+rx pm_standalone
