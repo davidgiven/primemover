@@ -1,11 +1,11 @@
 #!/bin/sh
--- Prime Mover
---
--- © 2006 David Given.
--- Prime Mover is licensed under the MIT open source license. To get the full
--- license text, run this file with the '--license' option.
---
--- $Id:citadel.lua 4326 2006-02-18 12:26:22Z hjalfi $
+# Prime Mover
+#
+# © 2006 David Given.
+# Prime Mover is licensed under the MIT open source license. To get the full
+# license text, run this file with the '--license' option.
+#
+# $Id$
 
 THISFILE="$0"
 CC=cc
