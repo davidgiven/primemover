@@ -1,0 +1,41 @@
+#!/bin/sh
+-- Prime Mover
+--
+-- © 2006 David Given.
+-- Prime Mover is licensed under the MIT open source license. To get the full
+-- license text, run this file with the '--license' option.
+--
+-- $Id:citadel.lua 4326 2006-02-18 12:26:22Z hjalfi $
+
+THISFILE="$0"
+CC=cc
+PMEXEC=./.pm-exec-`arch`
+set -e
+
+extract_section() {
+	sed -e "0,/^XXXXSTART$1/d" "$THISFILE" | (
+		read size
+		dd bs=1 count=$size 2>/dev/null
+	) | %%%EXTRACTOR%%%
+}
+
+# If the bootstrap's built, run it.
+
+if [ $PMEXEC -nt $0 ]; then
+	extract_section script | $PMEXEC /dev/stdin "$@"
+	exit $?
+fi
+
+# Otherwise, compile it and restart.
+
+echo "pm: bootstrapping..."
+
+CFILE=/tmp/pm-$$.c
+trap "rm -f $CFILE" EXIT
+
+extract_section interpreter > /tmp/pm-$$.c
+$CC $CFILE -o $PMEXEC && exec "$THISFILE" "$@"
+
+echo "pm: bootstrap failed."
+exit 1
+
