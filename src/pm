@@ -5,13 +5,13 @@
 -- Prime Mover is licensed under the MIT open source license. Search
 -- for 'MIT' in this file to find the full license text.
 --
--- $Id:citadel.lua 4326 2006-02-18 12:26:22Z hjalfi $
+-- $Id$
 
 -- ======================================================================= --
 --                                GLOBALS                                  --
 -- ======================================================================= --
 
-local VERSION = "0.1pre1"
+local VERSION = "0.1pre2"
 
 -- Fast versions of useful system variables.
 
@@ -42,7 +42,7 @@ local _
 local delete_output_files_on_error = true
 local purge_intermediate_cache = false
 local no_execute = false
-local verbose = true
+local verbose = false
 local input_files = {}
 local targets = {}
 intermediate_cache_dir = ".pm-cache/"
@@ -54,6 +54,10 @@ local scope = {object=sandbox, next=nil}
 local intermediate_cache = {}
 local intermediate_cache_count = 0
 local buildstages = 0
+
+-- Atoms.
+
+local PARENT = {}
 
 -- Exported symbols (set to dummy values).
 
@@ -191,6 +195,9 @@ end
 local function do_install(self, src, dest)
 	src = self:__expand(src)
 	dest = self:__expand(dest)
+	if verbose then
+		message("installing '", src, "' --> '", dest, "'")
+	end
 	
 	mkcontainerdir(dest)
 	local f, e = posix.link(src, dest)
@@ -221,6 +228,9 @@ end
 
 function install(src, dest)
 	return function(self, inputs, outputs)
+		local src = src
+		local dest = dest
+		
 		if (dest == nil) then
 			dest = src
 			src = outputs[1]
@@ -544,15 +554,41 @@ end
 function node:__index(key)
 	local i = string_byte(key, 1)
 	if (i >= 65) and (i <= 90) then
-		local s = scope
-		while s do
+		-- Scan up the class hierarchy.
+		
+		local recurse
+		recurse = function(s, key)
 			local o = rawget(s.object, key)
 			if o then
+				-- Handle lists of the form {PARENT, "foo", "bar"...}
+				
+				if (type(o) == "table") and (o[1] == PARENT) then
+					local parent = recurse(s.next, key)
+					local newo = {}
+					
+					if parent then
+						if (type(parent) ~= "table") then
+							parent = {parent}
+						end
+						for _, j in ipairs(parent) do
+							table_insert(newo, j)
+						end
+					end
+					for _, j in ipairs(o) do
+						if (j ~= PARENT) then
+							table_insert(newo, j)
+						end
+					end
+					return newo
+				end
 				return o
 			end
-			
-			s = s.next
+			-- Tail recursion.
+			return recurse(s.next, key)
 		end
+		
+		-- Tail recursion.
+		return recurse(scope, key)
 	end
 	return nil
 end
@@ -647,7 +683,9 @@ function node:__build()
 		for _, i in ipairs(depends) do
 			local tt = filetime(i)
 			if (tt > t) then
---				print("(rebuilding "..self.class.." because "..i.." newer then "..rendertable(outputs)..")")
+				if verbose then
+					message("rebuilding ", self.class, " because ", i, " newer then ", rendertable(outputs))
+				end
 				rebuild = true
 				break
 			end
@@ -873,6 +911,8 @@ table_merge(sandbox, {
 	
 	pm = _G,
 	node = node,
+	
+	PARENT = PARENT,
 })
 
 -- Switch into sandbox mode.
@@ -1311,6 +1351,7 @@ Options:
    -fX   --file X      Reads in the pmfile X. May be specified multiple times.
    -DX=Y --define X=Y  Defines variable X to value Y (or true if Y omitted)
    -n    --no-execute  Don't actually execute anything
+   -v    --verbose     Be more verbose
    
 If no pmfiles are explicitly specified, 'pmfile' is read.
 If no targets are explicitly specified, 'default' is built.
@@ -1389,6 +1430,11 @@ SOFTWARE.
 		return 0
 	end
 	
+	local function do_verbose(opt)
+		verbose = true
+		return 0
+	end
+	
 	local argmap = {
 		["h"]           = do_help,
 		["help"]        = do_help,
@@ -1402,6 +1448,8 @@ SOFTWARE.
 		["define"]      = do_define,
 		["n"]           = do_no_execute,
 		["no-execute"]  = do_no_execute,
+		["v"]           = do_verbose,
+		["verbose"]     = do_verbose,
 		["license"]     = do_license,
 	}
 	
