@@ -13,7 +13,7 @@ PMEXEC=./.pm-exec-`arch`
 set -e
 
 extract_section() {
-	sed -e "0,/^XXXXSTART$1/d" "$THISFILE" | (
+	sed -e "1,/^XXXXSTART$1/d" "$THISFILE" | (
 		read size
 		dd bs=1 count=$size 2>/dev/null
 	) | %%%EXTRACTOR%%%
