@@ -12,11 +12,16 @@ CC=cc
 PMEXEC=./.pm-exec-`arch`
 set -e
 
+GZFILE=/tmp/pm-$$.gz
+CFILE=/tmp/pm-$$.c
+trap "rm -f $GZFILE $CFILE" EXIT
+
 extract_section() {
 	sed -e "1,/^XXXXSTART$1/d" "$THISFILE" | (
 		read size
 		dd bs=1 count=$size 2>/dev/null
-	) | %%%EXTRACTOR%%%
+	) > $GZFILE
+	cat $GZFILE | %%%EXTRACTOR%%%
 }
 
 # If the bootstrap's built, run it.
@@ -29,9 +34,6 @@ fi
 # Otherwise, compile it and restart.
 
 echo "pm: bootstrapping..."
-
-CFILE=/tmp/pm-$$.c
-trap "rm -f $CFILE" EXIT
 
 extract_section interpreter > /tmp/pm-$$.c
 $CC $CFILE -o $PMEXEC && exec "$THISFILE" "$@"
