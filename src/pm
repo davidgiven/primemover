@@ -215,7 +215,8 @@ local function do_install(self, src, dest)
 		end
 	end
 	
-	if (e == "Invalid cross-device link") then
+	if (e == "Invalid cross-device link") or
+	   (e == "Cross-device link") then
 		f, e = posix.copy(src, dest)
 		if f then
 			return
