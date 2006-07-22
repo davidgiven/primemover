@@ -559,6 +559,9 @@ function node:__index(key)
 		
 		local recurse
 		recurse = function(s, key)
+			if not s then
+				return nil
+			end
 			local o = rawget(s.object, key)
 			if o then
 				-- Handle lists of the form {PARENT, "foo", "bar"...}
