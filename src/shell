@@ -7,9 +7,20 @@
 #
 # $Id$
 
+if [ -x "$(which arch)" ]; then
+	ARCH="$(arch)"
+elif [ -x "$(which machine)" ]; then
+	ARCH="$(machine)"
+elif [ -x "$(which uname)" ]; then
+	ARCH="$(uname -m)"
+else
+	echo "pm: unable to determine target type, proceeding anyway"
+	ARCH=unknown
+fi
+	
 THISFILE="$0"
 CC=cc
-PMEXEC=./.pm-exec-`arch`
+PMEXEC="./.pm-exec-$ARCH"
 set -e
 
 GZFILE=/tmp/pm-$$.gz
@@ -26,8 +37,8 @@ extract_section() {
 
 # If the bootstrap's built, run it.
 
-if [ $PMEXEC -nt $0 ]; then
-	extract_section script | $PMEXEC /dev/stdin "$@"
+if [ "$PMEXEC" -nt $0 ]; then
+	extract_section script | "$PMEXEC" /dev/stdin "$@"
 	exit $?
 fi
 
@@ -36,7 +47,7 @@ fi
 echo "pm: bootstrapping..."
 
 extract_section interpreter > /tmp/pm-$$.c
-$CC $CFILE -o $PMEXEC && exec "$THISFILE" "$@"
+$CC $CFILE -o "$PMEXEC" && exec "$THISFILE" "$@"
 
 echo "pm: bootstrap failed."
 exit 1
