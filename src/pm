@@ -297,6 +297,7 @@ local function create_intermediate_cache()
 	if not f then
 		-- The directory doesn't exist, so create it.
 		
+		mkcontainerdir(d)
 		f = posix.mkdir(d)
 		if not f then
 			usererror("unable to create intermediate file cache directory")
