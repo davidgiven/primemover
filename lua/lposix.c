@@ -44,7 +44,9 @@ static const char *filetype(mode_t m)
 	else if (S_ISCHR(m))	return "character device";
 	else if (S_ISBLK(m))	return "block device";
 	else if (S_ISFIFO(m))	return "fifo";
+#ifdef S_ISSOCK
 	else if (S_ISSOCK(m))	return "socket";
+#endif
 	else			return "?";
 }
 
