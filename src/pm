@@ -164,6 +164,17 @@ local function dirname(f)
 end
 posix.dirname = dirname
 
+-- Makes an absolute path.
+
+local function absname(f)
+	if string.find(f, "^/") then
+		return f
+	end
+	
+	return posix.getcwd().."/"..f
+end
+posix.absname = absname
+
 -- Copies a file.
 
 local function copy(src, dest)
@@ -193,33 +204,25 @@ end
 -- Install a file (suitable as a command list entry).
 
 local function do_install(self, src, dest)
-	src = self:__expand(src)
-	dest = self:__expand(dest)
+	src = absname(self:__expand(src))
+	dest = absname(self:__expand(dest))
 	if verbose then
 		message("installing '", src, "' --> '", dest, "'")
 	end
 	
 	mkcontainerdir(dest)
-	local f, e = posix.link(src, dest)
+	local f, e = posix.symlink(src, dest)
 	if f then
 		return
 	end
 
-	if (e == "File exists") then
+	if (e ~= nil) then
 		f, e = posix.unlink(dest)
 		if f then
-			f, e = posix.link(src, dest)
+			f, e = posix.symlink(src, dest)
 			if f then
 				return
 			end
-		end
-	end
-	
-	if (e == "Invalid cross-device link") or
-	   (e == "Cross-device link") then
-		f, e = posix.copy(src, dest)
-		if f then
-			return
 		end
 	end
 	
@@ -285,15 +288,16 @@ end
 _G.filetouch = filetouch
 
 local function create_intermediate_cache()
-	message("creating new intermediate file cache in '"..intermediate_cache_dir.."'")
+	local d = dirname(intermediate_cache_dir)
+	message("creating new intermediate file cache in '"..d.."'")
 	
 	-- Attempt to wipe the old cache directory.
 	
-	local f = posix.files(intermediate_cache_dir)
+	local f = posix.files(d)
 	if not f then
 		-- The directory doesn't exist, so create it.
 		
-		f = posix.mkdir(intermediate_cache_dir)
+		f = posix.mkdir(d)
 		if not f then
 			usererror("unable to create intermediate file cache directory")
 		end
@@ -322,7 +326,7 @@ local function create_intermediate_cache()
 			end
 		end
 		
-		rmdir(intermediate_cache_dir..".")
+		rmdir(d)
 	end
 end
 
