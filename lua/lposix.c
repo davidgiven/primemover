@@ -672,7 +672,7 @@ static int Pstat(lua_State *L)			/** stat(path,[selector]) */
 {
 	struct mystat s;
 	const char *path=luaL_checkstring(L, 1);
-	if (lstat(path,&s.s)==-1) return pusherror(L, path);
+	if (stat(path,&s.s)==-1) return pusherror(L, path);
 	s.type=filetype(s.s.st_mode);
 	modechopper(s.s.st_mode, s.mode);
 	return doselection(L, 2, Sstat, Fstat, &s);
