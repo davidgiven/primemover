@@ -29,6 +29,7 @@ local table_getn = table.getn
 local table_concat = table.concat
 
 local posix_stat = posix.stat
+local posix_readlink = posix.readlink
 local posix_unlink = posix.unlink
 local posix_rmdir = posix.rmdir
 
@@ -267,7 +268,18 @@ local function filetime(f)
 		return t
 	end
 	
-	t = posix_stat(f, "mtime") or 0
+	-- Stupid BeOS doesn't dereference symlinks on stat().
+	
+	local realf = f
+	while true do
+		local newf, e = posix_readlink(realf)
+		if e then
+			break
+		end
+		realf = newf
+	end
+	
+	t = posix_stat(realf, "mtime") or 0
 	statted_files[f] = t
 	return t
 end
@@ -693,7 +705,7 @@ function node:__build()
 			local tt = filetime(i)
 			if (tt > t) then
 				if verbose then
-					message("rebuilding ", self.class, " because ", i, " newer then ", rendertable(outputs))
+					message("rebuilding ", self.class, " because ", i, " newer than ", rendertable(outputs))
 				end
 				rebuild = true
 				break
