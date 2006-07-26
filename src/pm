@@ -59,6 +59,7 @@ local buildstages = 0
 -- Atoms.
 
 local PARENT = {}
+local EMPTY = {}
 
 -- Exported symbols (set to dummy values).
 
@@ -136,21 +137,32 @@ end
 
 -- Turn a list of strings into a single quoted string.
 
-function rendertable(i)
+local function renderinto(i, t)
 	if (type(i) == "table") then
-		if (table_getn(i) > 0) then
-			local t = {}
-			for _, j in ipairs(i) do
-				j = string_gsub(j, "\\", "\\\\")
-				j = string_gsub(j, '"', '\\"')
-				table_insert(t, j)
-			end
-			i = '"'..table_concat(t, '" "')..'"'
-		else
-			i = ""
+		for _, j in ipairs(i) do
+			renderinto(j, t)
+		end
+	else
+		if (i ~= nil) then
+			i = string_gsub(i, "\\", "\\\\")
+			i = string_gsub(i, '"', '\\"')
+			table_insert(t, i)
 		end
 	end
-	return i
+end
+
+function rendertable(i)
+	if (type(i) == "string") then
+		return i
+	end
+	
+	if (i == nil) or (i == EMPTY) then
+		return ""
+	end
+	
+	local t = {}
+	renderinto(i, t)
+	return '"'..table_concat(t, '" "')..'"'
 end
 local rendertable = rendertable
 
@@ -934,6 +946,7 @@ table_merge(sandbox, {
 	node = node,
 	
 	PARENT = PARENT,
+	EMPTY = EMPTY,
 })
 
 -- Switch into sandbox mode.
