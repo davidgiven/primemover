@@ -43,10 +43,11 @@ local _
 local delete_output_files_on_error = true
 local purge_intermediate_cache = false
 local no_execute = false
-local verbose = false
 local input_files = {}
 local targets = {}
 intermediate_cache_dir = ".pm-cache/"
+verbose = false
+quiet = false
 
 -- Application globals.
 
@@ -60,9 +61,11 @@ local buildstages = 0
 
 local PARENT = {}
 local EMPTY = {}
+local REDIRECT = {}
 
 -- Exported symbols (set to dummy values).
 
+message = 0
 filetime = 0
 filetouch = 0
 install = 0
@@ -82,6 +85,7 @@ local function message(...)
 	stderr:write(unpack(arg))
 	stderr:write("\n")
 end
+_G.message = message
 
 local function usererror(...)
 	stderr:write("pm: ")
@@ -313,7 +317,9 @@ _G.filetouch = filetouch
 
 local function create_intermediate_cache()
 	local d = dirname(intermediate_cache_dir)
-	message("creating new intermediate file cache in '"..d.."'")
+	if not quiet then
+		message("creating new intermediate file cache in '"..d.."'")
+	end
 	
 	-- Attempt to wipe the old cache directory.
 	
@@ -593,26 +599,32 @@ function node:__index(key)
 			end
 			local o = rawget(s.object, key)
 			if o then
-				-- Handle lists of the form {PARENT, "foo", "bar"...}
-				
-				if (type(o) == "table") and (o[1] == PARENT) then
-					local parent = recurse(s.next, key)
-					local newo = {}
-					
-					if parent then
-						if (type(parent) ~= "table") then
-							parent = {parent}
+				if (type(o) == "table") then
+
+					-- Handle lists of the form {PARENT, "foo", "bar"...}					
+					if (o[1] == PARENT) then
+						local parent = recurse(s.next, key)
+						local newo = {}
+						
+						if parent then
+							if (type(parent) ~= "table") then
+								parent = {parent}
+							end
+							for _, j in ipairs(parent) do
+								table_insert(newo, j)
+							end
 						end
-						for _, j in ipairs(parent) do
-							table_insert(newo, j)
+						for _, j in ipairs(o) do
+							if (j ~= PARENT) then
+								table_insert(newo, j)
+							end
 						end
+						return newo
+
+					-- Handle lists of the form {REDIRECT, "newkey"}
+					elseif (o[1] == REDIRECT) then
+						return self:__index(o[2])
 					end
-					for _, j in ipairs(o) do
-						if (j ~= PARENT) then
-							table_insert(newo, j)
-						end
-					end
-					return newo
 				end
 				return o
 			end
@@ -715,6 +727,7 @@ function node:__build()
 	if (not rebuild and depends) then
 		for _, i in ipairs(depends) do
 			local tt = filetime(i)
+--			message("comparing ", t, " with ", tt, " (", rendertable({i}), ")")
 			if (tt > t) then
 				if verbose then
 					message("rebuilding ", self.class, " because ", i, " newer than ", rendertable(outputs))
@@ -875,7 +888,9 @@ function node:__invoke(command, inputs, outputs)
 	for _, s in ipairs(command) do
 		if (type(s) == "string") then
 			s = self:__expand(s)
-			traceoutput(s)
+			if not quiet then
+				traceoutput(s)
+			end
 			if not no_execute then
 				local r = os.execute(s)
 				if (r ~= 0) then
@@ -1386,6 +1401,7 @@ Options:
    -DX=Y --define X=Y  Defines variable X to value Y (or true if Y omitted)
    -n    --no-execute  Don't actually execute anything
    -v    --verbose     Be more verbose
+   -q    --quiet       Be more quiet
    
 If no pmfiles are explicitly specified, 'pmfile' is read.
 If no targets are explicitly specified, 'default' is built.
@@ -1469,6 +1485,11 @@ SOFTWARE.
 		return 0
 	end
 	
+	local function do_quiet(opt)
+		quiet = true
+		return 0
+	end
+	
 	local argmap = {
 		["h"]           = do_help,
 		["help"]        = do_help,
@@ -1484,6 +1505,8 @@ SOFTWARE.
 		["no-execute"]  = do_no_execute,
 		["v"]           = do_verbose,
 		["verbose"]     = do_verbose,
+		["q"]           = do_quiet,
+		["quiet"]       = do_quiet,
 		["license"]     = do_license,
 	}
 	
