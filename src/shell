@@ -29,7 +29,7 @@ trap "rm -f $GZFILE $CFILE" EXIT
 extract_section() {
 	sed -e "1,/^XXXXSTART$1/d" "$THISFILE" | (
 		read size
-		dd bs=1 count=$size 2>/dev/null
+		head -c $size
 	) > $GZFILE
 	cat $GZFILE | %%%EXTRACTOR%%%
 }
@@ -46,7 +46,7 @@ fi
 echo "pm: bootstrapping..."
 
 if [ -x "$(which gcc 2>/dev/null)" ]; then
-	CC="gcc -O2 -s"
+	CC="gcc -O -s"
 else
 	CC="cc"
 fi
