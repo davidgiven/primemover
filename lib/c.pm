@@ -125,17 +125,18 @@ simple_with_clike_dependencies = simple {
 		for _, i in ipairs(cincludes) do
 			local _, _, p = string_find(i, "^-I[ \t]*(.+)$")
 			if p then
-				table_insert(includes, p)
+				table_insert(includes, self:__expand(p))
 			end
 		end
 		
-		local depends = calculate_dependencies(inputs[1], includes)
+		local input = self:__expand(inputs[1])
+		local depends = calculate_dependencies(input, includes)
 		if not depends then
 			self:__error("could not determine the dependencies for ",
-				pm.rendertable(inputs))
+				pm.rendertable({input}))
 		end
 		if pm.verbose then
-			pm.message('"', inputs[1], '" appears to depend on ',
+			pm.message('"', input, '" appears to depend on ',
 				pm.rendertable(depends))
 		end
 		return depends
