@@ -1,0 +1,46 @@
+#!/bin/sh
+
+SRC=`pwd`/src
+DST=`pwd`/staging
+DESTURL=$DST
+
+extensionmap() {
+	case "$1" in
+		i) echo html;;
+		*) echo $1;;
+	esac
+}
+
+rebuild() {
+	mkdir -p `dirname $2`
+	case "$3" in
+		i)
+			xsltproc --novalid --stringparam SRC "$SRC" --stringparam DESTURL "$DESTURL" tpl/standard.xslt "$1" > "$2"
+			#sabcmd tpl/standard.xslt $1 "\$SRC=$SRC" "\$DESTURL=$DESTURL" > $2
+			#xalan -xsl tpl/standard.xslt -in $1 -out $2
+			;;
+			
+		*)
+			cp $1 $2
+			;;
+	esac
+	
+	if [ $? != 0 ]; then
+		echo "Command failed"
+		rm -f $2
+		exit 1
+	fi
+}
+
+inputs=`cd $SRC && find -type f`
+
+for f in $inputs; do
+	srcextension=${f##*.}
+	destextension=`extensionmap $srcextension`
+	extensionless=${f%.*}
+	source=$SRC/$f
+	dest=$DST/$extensionless.$destextension
+
+	echo $f
+	rebuild $source $dest $srcextension
+done
