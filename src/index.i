@@ -12,7 +12,14 @@
 
     <h1>Prime Mover</h1>
 
-    <p>Insert blurb here.</p>
+    <p>Prime Mover is a build tool, not unlike <tt>make</tt>. It is 
+    designed to be small, portable, flexible, powerful, and is very 
+    easy to deploy. It can be distributed along with your application 
+    source code and does not require your end user to have anything 
+    other than a basic C compiler in order to use it.</p>
+
+    <p>For more information, see the <a href="about.html">About Prime 
+    Mover</a> page.</p>
 
   </body>
 
