@@ -28,28 +28,31 @@
 			</head>
 			
 			<body>
-				<div class="left">
-					<div class="boxed">
-						<table width="100%"><tr>
-							<td class="center">
-								<a href="/"><img src="{$DESTURL}/home.png" alt="Home"/></a>
-							</td><td class="center">
-								<a href="mailto:dg@cowlark.com"><img src="{$DESTURL}/mailme.png" alt="Mail the author"/></a>
-							</td><td class="center">
-								<a href="/about.html"><img src="{$DESTURL}/about.png" alt="About the site"/></a>
-							</td><td class="center">
-								<a href="/index.html"><img src="{$DESTURL}/index.png" alt="Index"/></a>
-							</td>
-						</tr></table>
-					</div>
-					
-					<div class="boxed">
+				<table cols="4" rows="1" width="100%" class="top-table">
+					<tr>
+						<td class="boxed top-logo">
+							Prime Mover
+						</td>
+
+						<td class="boxed top-maintitle" colspan="2">
+							<div class="toc-path"><xsl:call-template name="path-to-page"/></div>
+							<h1 class="title"><xsl:value-of select="html/head/title"/></h1>
+						</td>
+
+						<td class="boxed top-navigation">
+							<xsl:call-template name="navigation-block"/>
+						</td>
+					</tr>
+				</table>
+				
+				<div class="body">										
+					<div class="boxed body-navigation">
 						<h4>Navigation</h4>
 						<xsl:call-template name="site-contents"/>
 					</div>
 					
 					<xsl:if test="count(html/body/h1) > 0">
-						<div class="boxed">
+						<div class="boxed body-contents">
 							<h4>Page Contents</h4>
 							<ol class="toclist">
 								<xsl:apply-templates select="html/body/h1" mode="toc"/>
@@ -57,6 +60,10 @@
 						</div>
 					</xsl:if>
 						
+					<xsl:apply-templates select="html/body/*"/>
+				</div>
+				
+				<div class="bottom">
 					<div class="center">
 						<a href="http://validator.w3.org/check?uri=referer">
 						<img src="http://www.w3.org/Icons/valid-xhtml10"
@@ -68,15 +75,11 @@
 						All content © 2000-2006 David Given unless otherwise
 						stated.
 					</div>
+
+					<div class="boxed navigation">
+						<xsl:call-template name="navigation-block"/>
+					</div>
   				</div>
-  				
-				<div class="right">
-					<div class="path"><xsl:call-template name="path-to-page"/></div>
-					<h1 class="title"><xsl:value-of select="html/head/title"/></h1>
-					<xsl:call-template name="navigation-block"/>
-					<xsl:apply-templates select="html/body/*"/>
-					<xsl:call-template name="navigation-block"/>
-				</div>
 			</body>
 		</html>
 	</xsl:template>

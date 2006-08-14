@@ -1,47 +1,74 @@
 body
 {
 	font-family: sans-serif;
+	font-size: small;
 	margin:0;
 	padding:0;
 	color: #000;
-	background: #fff;
-	margin-top: 0;
-	margin-bottom: 0;
-	margin-left: 0;
-	margin-right: 0;
-	padding-left: 0;
-	padding-right: 0;
-}
-
-div.left
-{
-	position: absolute;
-	top: 2em;
-	left: 1em;
+	background: #ddc;
+	margin: 0;
 	padding: 0;
-	width: 19em;
 }
 
-div.left > h1.title
+.top-table
+{
+	border-collapse: separate;
+	border-spacing: 1em;
+}
+
+.top-logo
+{
+	text-align: center;
+	font-size: large;
+	font-style: italic;
+	font-family: serif;
+}
+
+.top-maintitle
+{
+}
+
+.top-navigation
+{
+	background: #fee !important;
+}
+
+div.top > h1.title
 {
 	text-align: center;
 }
 
-div.right
+div.body
 {
-	margin-left: 21em;
-	padding: 0;
-	margin-right: 1em;
+	border: 1px solid #000;
+	margin: 0 1em 0 1em;
+	padding: 1em;
+	background: #fff;
+	clear: both;
 }
 
-div.right > div.path
+.body-navigation, .body-contents
+{
+	float: right;
+	width: 15em;
+	font-size: smaller;
+	background: #ffe !important;
+}
+
+.body-contents
+{
+	margin-top: 1em;
+	clear: right;
+}
+
+div.body > div.path
 {
 	font-size: smaller;
 	font-weight: bold;
 	margin-top: 2em;
 }
 
-div.right > h1.title
+div.body > h1.title
 {
 	text-align: left;
 	font-size: large;
@@ -50,18 +77,16 @@ div.right > h1.title
 	border-bottom: 1px solid #000;
 }
 
-div.footer
+div.bottom
 {
 	clear: both;
 }
 
-div.boxed
+.boxed
 {
 	border: 1px solid #000;
+	background: #fff;
 	padding: 0.5em;
-	margin: 1em;
-	font-size: smaller;
-	background: #ffe;
 }
 
 div.boxed > h4
