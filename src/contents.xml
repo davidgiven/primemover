@@ -1,3 +1,8 @@
 <page src="index.i">
 	<page src="about.i"/>
+	<page src="faq.i"/>
+	<page src="manual/index.i">
+		<page src="manual/current/index.i">
+		</page>
+	</page>
 </page>

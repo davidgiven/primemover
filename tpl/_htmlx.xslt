@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	
 	<xsl:output method="html"/>
 	
@@ -10,6 +9,13 @@
 		<xsl:copy>
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
+		</xsl:copy>
+	</xsl:template>
+	
+	<xsl:template match="pre">
+		<xsl:copy>
+			<xsl:copy-of select="@*"/>
+			<xsl:value-of select="."/>
 		</xsl:copy>
 	</xsl:template>
 	

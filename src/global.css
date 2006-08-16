@@ -24,13 +24,25 @@ body
 	font-family: serif;
 }
 
-.top-maintitle
+.toc-path
 {
+	font-size: 50%;
+	padding-bottom: 0.5em;
 }
 
-.top-navigation
+.top-maintitle > h1
 {
+	font-size: large;
+	margin: 0;
+}
+
+.navigation-cell
+{
+	text-align: center;
+	border: 1px solid black;
+	font-size: smaller;
 	background: #fee !important;
+	padding: 0 0.5em 0.5em 0.5em;
 }
 
 div.top > h1.title
@@ -50,7 +62,7 @@ div.body
 .body-navigation, .body-contents
 {
 	float: right;
-	width: 15em;
+	width: 25em;
 	font-size: smaller;
 	background: #ffe !important;
 }
@@ -105,7 +117,7 @@ div.boxed > h4
 	text-align: center;
 }
 
-h1 { font-size: smaller; }
+h1 { font-size: normal; }
 h2 { font-size: normal; }
 h3 { font-size: normal; }
 h4 { font-size: normal; }
@@ -134,24 +146,15 @@ hr
 	margin-bottom: 2em;
 }
 
-table.navigation-block
+pre, tt
+{
+	font-family: mono;
+}
+
+pre
 {
 	font-size: smaller;
-	border: 1px solid black;
-	border-collapse: collapse;
-	background: #eef;
-}
-
-table.navigation-block th
-{
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	padding: 0.5em 0.5em 0 0.5em;
-}
-
-table.navigation-block td
-{
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	padding: 0 0.5em 0.5em 0.5em;
+	border: 1px solid #000;
+	background: #eee;
+	padding: 1em;
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	
 	<xsl:output method="html"/>
 	<xsl:param name="SRC"/>
@@ -103,36 +102,26 @@
 		<xsl:variable name="upnode" select="$currentnode/parent::*"/>
 		<xsl:variable name="nextnode" select="$currentnode/following-sibling::*[1]"/>
 		
-		<table class="navigation-block">
-			<tr>
-				<xsl:if test="$prevnode">
-					<th>Previous</th>
-				</xsl:if>
-				<xsl:if test="$upnode">
-					<th>Up</th>
-				</xsl:if>
-				<xsl:if test="$nextnode">
-					<th>Next</th>
-				</xsl:if>
-			</tr>
-			<tr>
-				<xsl:if test="$prevnode">
-					<td>
-						<xsl:apply-templates select="$prevnode" mode="site-contents"/>
-					</td>
-				</xsl:if>
-				<xsl:if test="$upnode">
-					<td>
-						<xsl:apply-templates select="$upnode" mode="site-contents"/>
-					</td>
-				</xsl:if>
-				<xsl:if test="$nextnode">
-					<td>
-						<xsl:apply-templates select="$nextnode" mode="site-contents"/>
-					</td>
-				</xsl:if>
-			</tr>
-		</table>
+		<td class="navigation-cell">
+			<xsl:if test="$prevnode">
+				<b>Previous</b><br/>
+				<xsl:apply-templates select="$prevnode" mode="site-contents"/>
+			</xsl:if>
+		</td>
+		
+		<td class="navigation-cell">
+			<xsl:if test="$upnode">
+				<b>Up</b><br/>
+				<xsl:apply-templates select="$upnode" mode="site-contents"/>
+			</xsl:if>
+		</td>
+		
+		<td class="navigation-cell">
+			<xsl:if test="$nextnode">
+				<b>Next</b><br/>
+				<xsl:apply-templates select="$nextnode" mode="site-contents"/>
+			</xsl:if>
+		</td>
 	</xsl:template>
 	
 	<xsl:template match="*" mode="site-contents">

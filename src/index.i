@@ -10,7 +10,7 @@
 
   <body>
 
-    <h1>Prime Mover</h1>
+    <h1>Introduction</h1>
 
     <p>Prime Mover is a build tool, not unlike <tt>make</tt>. It is 
     designed to be small, portable, flexible, powerful, and is very 
@@ -20,6 +20,20 @@
 
     <p>For more information, see the <a href="about.html">About Prime 
     Mover</a> page.</p>
+
+    <h1>Getting it</h1>
+
+    <p>You can download any release of Prime Mover from the 
+    <a href="http://sourceforge.net/project/showfiles.php?group_id=157791">
+    Sourceforge download site</a>.</p>
+
+    <h1>Documentation</h1>
+
+    <p>Read <a href="manual.html">the friendly manual</a>.</p>
+
+    <h1>News</h1>
+
+    <p>No news yet!</p>
 
   </body>
 
