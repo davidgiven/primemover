@@ -44,12 +44,12 @@
 				
 				<div class="body">										
 					<div class="boxed body-navigation">
-						<h4>Navigation</h4>
+						<h4>Site Navigation</h4>
 						<xsl:call-template name="site-contents"/>
 					</div>
 					
-					<xsl:if test="count(html/body/h1) > 0">
-						<div class="boxed body-contents">
+					<xsl:if test="html/body/h1">
+						<div class="body-contents">
 							<h4>Page Contents</h4>
 							<ol class="toclist">
 								<xsl:apply-templates select="html/body/h1" mode="toc"/>
@@ -76,20 +76,21 @@
 						<td>
 							<a href="http://validator.w3.org/check?uri=referer">
 								<img src="http://www.w3.org/Icons/valid-xhtml10"
-									alt="Valid XHTML 1.0 Strict" height="31" width="88"/>
+									alt="Valid XHTML 1.0 Strict" height="31" width="88" border="0"/>
 							</a>
 						</td>
 
 						<td>
 							<a href="http://jigsaw.w3.org/css-validator/">
 								<img src="http://jigsaw.w3.org/css-validator/images/vcss"
-									alt="Valid CSS" height="31" width="88"/>
+									alt="Valid CSS" height="31" width="88" border="0"/>
 							</a>
 						</td>
 
 						<td>
 							<a href="http://sourceforge.net">
-								<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=157791&amp;type=1" width="88" height="31" border="0" alt="SourceForge.net Logo"/>
+								<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=157791&amp;type=1"
+									width="88" height="31" border="0" alt="SourceForge.net Logo"/>
 							</a>
 						</td>
 					</tr>
