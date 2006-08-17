@@ -5,7 +5,7 @@
 	<xsl:output method="html"/>
 	
 
-	<xsl:template match="p | i | b | u | tt | hr | a | ol | ul | li">
+	<xsl:template match="p | i | b | u | tt | hr | a | ol | ul | li | blockquote">
 		<xsl:copy>
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
