@@ -4,6 +4,7 @@
 	<page src="manual/index.i">
 		<page src="manual/current/index.i">
 			<page src="manual/current/concepts.i"/>
+			<page src="manual/current/pmfiles.i"/>
 		</page>
 	</page>
 </page>
