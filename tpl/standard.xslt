@@ -99,7 +99,7 @@
 		</html>
 	</xsl:template>
 
-	<xsl:template match="html/body/*[starts-with(local-name(),'h')]" mode="toc">
+	<xsl:template match="html/body/h1 | html/body/h2 | html/body/h3" mode="toc">
 		<li>
 			<xsl:element name="a">
 				<xsl:attribute name="href">
@@ -114,6 +114,8 @@
 			<ol class="toclist">
 				<xsl:apply-templates select="key('parentheader',generate-id())" mode="toc"/>
 			</ol>
-        </xsl:if>
+		</xsl:if>
 	</xsl:template>
+
+	<xsl:template match="html/body/h4" mode="toc"/>
 </xsl:stylesheet>

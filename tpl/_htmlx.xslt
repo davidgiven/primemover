@@ -5,11 +5,25 @@
 	<xsl:output method="html"/>
 	
 
-	<xsl:template match="p | i | b | u | tt | hr | a | ol | ul | li | blockquote">
+	<xsl:template match="p | i | b | u | tt | hr | a | ol | ul | li | blockquote | h4">
 		<xsl:copy>
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
 		</xsl:copy>
+	</xsl:template>
+	
+	<xsl:template match="code">
+		<tt>
+			<xsl:copy-of select="@*"/>
+			<xsl:apply-templates/>
+		</tt>
+	</xsl:template>
+	
+	<xsl:template match="var | em">
+		<i>
+			<xsl:copy-of select="@*"/>
+			<xsl:apply-templates/>
+		</i>
 	</xsl:template>
 	
 	<xsl:template match="pre">
@@ -23,8 +37,41 @@
 		<hr/>
 	</xsl:template>
 	
+	
+	<xsl:template match="dl">
+		<table columns="2" width="100%" class="dl">
+			<xsl:for-each select="dt">
+				<tr>
+					<td class="dl-left">
+						<xsl:apply-templates select="*"/>
+					</td>
+					<td class="dl-right">
+						<xsl:apply-templates select="following-sibling::dd[1]/*"/>
+					</td>
+				</tr>
+			</xsl:for-each>
+		</table>
+	</xsl:template>
+	
+	
+	<xsl:template match="img[substring(@src, string-length(@src)-3) = '.svg']">
+		<xsl:element name="object">
+			<xsl:attribute name="data">
+				<xsl:value-of select="@src"/>
+			</xsl:attribute>
+			<xsl:attribute name="type" value="image/svg+xml"/>
+			<xsl:text>[An SVG file goes here]</xsl:text>
+		</xsl:element>
+	</xsl:template>
+	
+	<xsl:template match="img">
+		<xsl:copy>
+			<xsl:copy-of select="@*"/>
+			<xsl:apply-templates/>
+		</xsl:copy>
+	</xsl:template>		
 
-	<xsl:template match="h1|h2|h3|h4">
+	<xsl:template match="h1|h2|h3">
 		<h1>
 			<xsl:element name="a">
 				<xsl:attribute name="name">
@@ -59,18 +106,6 @@
 		<xsl:apply-templates/>
 	</xsl:template>
 	
-	<xsl:template match="h4" mode="header-label">
-		<xsl:number level="any" count="h1"/>
-		<xsl:text>.</xsl:text>
-		<xsl:number level="any" from="h1" count="h2"/>
-		<xsl:text>.</xsl:text>
-		<xsl:number level="any" from="h2" count="h3"/>
-		<xsl:text>.</xsl:text>
-		<xsl:number level="any" from="h3" count="h4"/>
-		<xsl:text>. </xsl:text>
-		<xsl:apply-templates/>
-	</xsl:template>
-	
 	
 	<xsl:template match="h1" mode="toc-indent">
 	</xsl:template>
@@ -81,10 +116,6 @@
 		
 	<xsl:template match="h3" mode="toc-indent">
 		<xsl:text>......</xsl:text>
-	</xsl:template>
-	
-	<xsl:template match="h4" mode="toc-indent">
-		<xsl:text>.........</xsl:text>
 	</xsl:template>
 	
 	
@@ -107,9 +138,6 @@
 	</xsl:template>
 	
 	<xsl:template match="h4" mode="toc-label">
-		<xsl:number level="any" from="h3" count="h4"/>
-		<xsl:text>. </xsl:text>
-		<xsl:apply-templates/>
 	</xsl:template>
 	
 	
