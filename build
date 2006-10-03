@@ -34,9 +34,27 @@ make_pm() {
 	chmod a+rx $3
 }
 
-#make_pm "cat" "cat" "pm_uncompressed"
+run_unit_test() {
+	echo "Running test $1..."
+	rm -f ERROR RESULT OUT DATA*
+	# Strange next line to prevent failures on error condition.
+	( ../pm_uncompressed -p -f "$1" &> ERROR ) && true
+	touch OUT
+	[ -f ERROR ] && (cat ERROR >> OUT)
+	[ -f RESULT ] && (cat RESULT >> OUT)
+	if ! diff -uN OUT "${1/.pm/.good}"; then
+		echo "Test failed"
+		exit 1
+	fi
+	rm -f ERROR RESULT OUT DATA*
+}
+
+make_pm "cat" "cat" "pm_uncompressed"
 make_pm "gzip -9c" "zcat" "pm_8bit"
 make_pm "gzip -9c | uuencode out" "uudecode -o /dev/stdout | zcat" "pm_7bit"
-#echo "Making pm_standalone"
-#cp src/pm pm_standalone
-#chmod a+rx pm_standalone
+
+cd tests
+../pm_uncompressed -p -f startup.pm
+for n in *.pm; do
+	run_unit_test "$n"
+done
