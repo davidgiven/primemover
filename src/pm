@@ -964,6 +964,19 @@ table_merge(sandbox, {
 	EMPTY = EMPTY,
 })
 
+-- Cause any reads from undefined keys in the sandbox to fail with an error.
+-- This helps debugging pmfiles somewhat.
+
+setmetatable(sandbox, {
+	__index = function(self, key)
+		local value = rawget(self, key)
+		if (value == nil) then
+			error(key.." could not be found in any applicable scope")
+		end
+		return value
+	end
+})
+
 -- Switch into sandbox mode.
 
 setfenv(1, sandbox)
@@ -972,14 +985,40 @@ setfenv(1, sandbox)
 
 -- Includes a file.
 
-function include(f)
+function include(f, ...)
 	local c, e = loadfile(f)
 	if not c then
-		usererror(e)
+		usererror("script compilation error: ", e)
 	end
 	
 	setfenv(c, sandbox)
-	c()
+	local arguments = arg
+	xpcall(
+		function()
+			c(unpack(arguments))
+		end,
+		function(e)
+			message("script execution error --- traceback follows:")
+			
+			local i = 1
+			while true do
+				local t = debug.getinfo(i)
+				if not t then
+					break
+				end
+				if (t.short_src ~= "stdin") and (t.short_src ~= "[C]") then
+					if (t.currentline == -1) then
+						t.currentline = ""
+					end
+					message("  ", t.short_src, ":", t.currentline)
+				end
+				i = i + 1
+			end
+			
+			e = string_gsub(e, "^stdin:[0-9]*: ", "")
+			usererror("script error: ", e)
+		end
+	)
 end
 
 --- file --------------------------------------------------------------------
@@ -1568,13 +1607,7 @@ end
 -- Load any input files.
 
 for _, i in ipairs(input_files) do
-	local c, e = loadfile(i)
-	if not c then
-		usererror(e)
-	end
-	
-	setfenv(c, sandbox)
-	c()
+	sandbox.include(i, unpack(arg))
 end
 
 -- Set up the intermediate cache.
