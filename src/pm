@@ -11,7 +11,7 @@
 --                                GLOBALS                                  --
 -- ======================================================================= --
 
-local VERSION = "0.1pre2"
+local VERSION = "0.1"
 
 -- Fast versions of useful system variables.
 
@@ -622,10 +622,18 @@ function node:__index(key)
 			return recurse(s.next, key)
 		end
 		
+		-- We want this node looked at first, so fake up a scope entry for it.
+		local fakescope = {
+			next = scope,
+			object = self
+		}
+		
 		-- Tail recursion.
-		return recurse(scope, key)
+		return recurse(fakescope, key)
 	end
-	return nil
+	
+	-- For local properties, just return what's here.
+	return rawget(self, key)
 end
 
 -- Little utility that emits an error message.
@@ -797,7 +805,7 @@ function node:__expand(s)
 			-- Get the basic value that the rest of the reference is going to
 			-- depend on.
 			
-			local result = self[varname]
+			local result = self:__index(varname)
 			if not result then
 				self:__error("doesn't understand variable '", varname, "'")
 			end
