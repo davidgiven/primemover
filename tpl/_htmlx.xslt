@@ -5,7 +5,7 @@
 	<xsl:output method="html"/>
 	
 
-	<xsl:template match="p | i | b | u | tt | hr | a | ol | ul | li | blockquote | h4">
+	<xsl:template match="p | i | b | u | tt | hr | ol | ul | li | blockquote | h4 | table | tbody | tr | td | th">
 		<xsl:copy>
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates/>
@@ -38,15 +38,26 @@
 	</xsl:template>
 	
 	
+	<xsl:template match="a[@href = text()]">
+		<xsl:apply-templates select="." mode="smartlink"/>
+	</xsl:template>
+
+	<xsl:template match="a">
+		<xsl:copy>
+			<xsl:copy-of select="@*"/>
+			<xsl:apply-templates/>
+		</xsl:copy>
+	</xsl:template>
+	
+
 	<xsl:template match="dl">
-		<table columns="2" width="100%" class="dl">
+		<table columns="2" class="dl">
 			<xsl:for-each select="dt">
 				<tr>
-					<td class="dl-left">
-						<xsl:apply-templates select="*"/>
-					</td>
-					<td class="dl-right">
-						<xsl:apply-templates select="following-sibling::dd[1]/*"/>
+					<td>
+						<xsl:apply-templates select="node()"/>
+					</td><td>
+						<xsl:apply-templates select="following-sibling::dd[1]/node()"/>
 					</td>
 				</tr>
 			</xsl:for-each>

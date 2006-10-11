@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE stylesheet [
+<!ENTITY nbsp "&#160;" >
+]>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	
@@ -24,77 +27,78 @@
 				<title><xsl:value-of select="html/head/title"/></title>
 				<link rel="stylesheet" type="text/css" href="{$DESTURL}/global.css"/>
 				<link rel="home" type="text/html" href="/"/>
+				<script type="text/javascript" src="{$DESTURL}/global.js"></script>
 			</head>
 			
 			<body>
-				<table cols="9" rows="1" width="100%" class="top-table">
-					<tr>
-						<td class="boxed top-logo" colspan="1">
-							Prime Mover
-						</td>
-
-						<td class="boxed top-maintitle" colspan="5">
-							<div class="toc-path"><xsl:call-template name="path-to-page"/></div>
-							<h1 class="title"><xsl:value-of select="html/head/title"/></h1>
-						</td>
-
-						<xsl:call-template name="navigation-block"/>
-					</tr>
-				</table>
+				<!-- Left-hand column -->
+				<div class="nav nav-logo">
+					<img src="{$DESTURL}/logo.png" alt="Prime Mover"/>
+				</div>
 				
-				<div class="body">										
-					<div class="boxed body-navigation">
-						<h4>Site Navigation</h4>
-						<xsl:call-template name="site-contents"/>
-					</div>
+				<div class="nav nav-related">
+					<xsl:call-template name="sibling-page-list"/>
+				</div>
+				
+				<div class="nav nav-children">
+					<xsl:call-template name="child-page-list"/>
+				</div>
+				
+				<div class="nav nav-icons">
+					<a href="http://validator.w3.org/check?uri=referer">
+						<img src="http://www.w3.org/Icons/valid-xhtml10"
+							alt="Valid XHTML 1.0 Strict" height="31" width="88" border="0"/>
+					</a>
+					<br/>
+					<a href="http://jigsaw.w3.org/css-validator/">
+						<img src="http://jigsaw.w3.org/css-validator/images/vcss"
+							alt="Valid CSS" height="31" width="88" border="0"/>
+					</a>
+					<br/>
+					<a href="http://sourceforge.net/projects/primemover">
+						<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=157791&amp;type=1"
+							width="88" height="31" border="0" alt="SourceForge.net Logo"/>
+					</a>
+				</div>
+				
+				<!-- Right-hand column -->
+				
+				<div class="page-path">
+					<p>
+						<xsl:call-template name="path-to-page"/>
+					</p>
+				</div>
+				
+				<div class="page-body">
+					<xsl:call-template name="navigation-block"/>
+					
+					<h1 class="title"><xsl:value-of select="html/head/title"/></h1>
 					
 					<xsl:if test="html/body/h1">
-						<div class="body-contents">
-							<h4>Page Contents</h4>
-							<ol class="toclist">
+						<div id="toc" class="body-contents">
+							<h4 id="toctitle">Page Contents</h4>
+							<ol class="toclist" style="display:none">
 								<xsl:apply-templates select="html/body/h1" mode="toc"/>
 							</ol>
 						</div>
 					</xsl:if>
-						
+
+					<script type="text/javascript">
+					//<![CDATA[
+					 if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } 
+					//]]>
+					</script>
+					
 					<xsl:apply-templates select="html/body/*"/>
-				</div>
-				
-				<table cols="9" rows="1" width="100%" class="top-table">
-					<tr>
-						<td class="boxed bottom-status" colspan="6">
+
+					<div class="body-copyright">
+						<p>
 							All content © 2000-2006 David Given unless otherwise
 							stated.
-						</td>
-
-						<xsl:call-template name="navigation-block"/>
-					</tr>
-				</table>
-				
-				<table cols="3" rows="1" width="100%" class="top-table center">
-					<tr>
-						<td>
-							<a href="http://validator.w3.org/check?uri=referer">
-								<img src="http://www.w3.org/Icons/valid-xhtml10"
-									alt="Valid XHTML 1.0 Strict" height="31" width="88" border="0"/>
-							</a>
-						</td>
-
-						<td>
-							<a href="http://jigsaw.w3.org/css-validator/">
-								<img src="http://jigsaw.w3.org/css-validator/images/vcss"
-									alt="Valid CSS" height="31" width="88" border="0"/>
-							</a>
-						</td>
-
-						<td>
-							<a href="http://sourceforge.net">
-								<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=157791&amp;type=1"
-									width="88" height="31" border="0" alt="SourceForge.net Logo"/>
-							</a>
-						</td>
-					</tr>
-  				</table>
+						</p>
+					</div>
+					<xsl:call-template name="navigation-block"/>
+				</div>
 			</body>
 		</html>
 	</xsl:template>
