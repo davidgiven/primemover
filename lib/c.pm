@@ -13,9 +13,13 @@ local filetime = pm.filetime
 -- Define some variables.
 
 CCOMPILER = "gcc"
-CC = "%CCOMPILER% %CBUILDFLAGS% %CDYNINCLUDES% %CINCLUDES% %CDEFINES% %CEXTRAFLAGS% -c -o %out% %in%"
-CPROGRAM = "%CCOMPILER% %CBUILDFLAGS% %CLINKFLAGS% %CEXTRAFLAGS% -o %out% %in% %CLIBRARIES%"
-AR = "%RM% %out% && ar cr %out% %in% && ranlib %out%"
+CXXCOMPILER = "g++"
+CC = "%CCOMPILER% %CBUILDFLAGS% %CDYNINCLUDES:cincludes% %CINCLUDES:cincludes% %CDEFINES:cdefines% %CEXTRAFLAGS% -c -o %out% %in%"
+CXX = "%CXXCOMPILER% %CBUILDFLAGS% %CDYNINCLUDES:cincludes% %CINCLUDES:cincludes% %CDEFINES:cdefines% %CEXTRAFLAGS% -c -o %out% %in%"
+CPROGRAM = "%CCOMPILER% %CBUILDFLAGS% %CLINKFLAGS% %CEXTRAFLAGS% -o %out% %in% %CLIBRARIES:clibraries%"
+CXXPROGRAM = "%CXXCOMPILER% %CBUILDFLAGS% %CLINKFLAGS% %CEXTRAFLAGS% -o %out% %in% %CLIBRARIES:clibraries%"
+
+CLIBRARY = "rm -f %out% && ar cr %out% %in% && ranlib %out%"
 
 CBUILDFLAGS = {"-g"}
 CINCLUDES = EMPTY
@@ -24,6 +28,44 @@ CEXTRAFLAGS = EMPTY
 CLINKFLAGS = EMPTY
 CDYNINCLUDES = EMPTY
 CLIBRARIES = EMPTY
+
+--- Custom string modifiers -------------------------------------------------
+
+local function prepend(rule, arg, prefix)
+	if (arg == EMPTY) then
+		return EMPTY
+	end
+	
+	local t = {}
+	for i, j in ipairs(arg) do
+		t[i] = prefix..j
+	end
+	return t
+end
+
+function pm.stringmodifier.cincludes(rule, arg)
+	return prepend(rule, arg, "-I")
+end
+
+function pm.stringmodifier.cdefines(rule, arg)
+	return prepend(rule, arg, "-D")
+end
+
+function pm.stringmodifier.clibraries(rule, arg)
+	if (arg == EMPTY) then
+		return EMPTY
+	end
+	
+	local t = {}
+	for i, j in ipairs(arg) do
+		if string_find(j, "%.a$") then
+			t[i] = j
+		else
+			t[i] = "-l"..j
+		end
+	end
+	return t
+end
 
 --- Manage C file dependencies ----------------------------------------------
 
@@ -41,7 +83,7 @@ local function calculate_dependencies(filename, includes)
 	
 	local calcdeps = 0
 	calcdeps = function(filename, file)
-		file = file or io.open(filename)
+		file = file or io_open(filename)
 		if not file then
 			return
 		end
@@ -58,7 +100,7 @@ local function calculate_dependencies(filename, includes)
 			if f then
 				for _, path in ipairs(localincludes) do
 					local subfilename = path.."/"..f
-					local subfile = io.open(subfilename)
+					local subfile = io_open(subfilename)
 					if subfile then
 						if not deps[subfilename] then
 							deps[subfilename] = true
@@ -123,10 +165,7 @@ simple_with_clike_dependencies = simple {
 		
 		local includes = {}
 		for _, i in ipairs(cincludes) do
-			local _, _, p = string_find(i, "^-I[ \t]*(.+)$")
-			if p then
-				table_insert(includes, self:__expand(p))
-			end
+			table_insert(includes, self:__expand(i))
 		end
 		
 		local input = self:__expand(inputs[1])
@@ -143,14 +182,19 @@ simple_with_clike_dependencies = simple {
 	end,
 	
 	__buildadditionalchildren = function(self)
-		self.CDYNINCLUDES = ""
+		self.CDYNINCLUDES = {}
 		if self.dynamicheaders then
 			for _, i in ipairs(self.dynamicheaders) do
 				local o = i:__build()
 				if o[1] then
-					self.CDYNINCLUDES = self.CDYNINCLUDES..' "-I'..string_gsub(o[1], "/[^/]*$", "")..'"'
+					table_insert(self.CDYNINCLUDES, string_gsub(o[1], "/[^/]*$", ""))
 				end
 			end
+		end
+		-- If no paths on the list, replace the list with EMPTY so it doesn't
+		-- expand to anything.
+		if (table_getn(self.CDYNINCLUDES) == 0) then
+			self.CDYNINCLUDES = EMPTY
 		end
 	end
 }
@@ -163,16 +207,28 @@ cfile = simple_with_clike_dependencies {
 	outputs = {"%U%-%I%.o"},
 }
 
+cxxfile = simple_with_clike_dependencies {
+	class = "cxxfile",
+	command = {"%CXX%"},
+	outputs = {"%U%-%I%.o"},
+}
+
 cprogram = simple {
 	class = "cprogram",
 	command = {"%CPROGRAM%"},
 	outputs = {"%U%-%I%"},
 }
 
+cxxprogram = simple {
+	class = "cxxprogram",
+	command = {"%CXXPROGRAM%"},
+	outputs = {"%U%-%I%"},
+}
+
 clibrary = simple {
 	class = "clibrary",
 	command = {
-		"%AR%"
+		"%CLIBRARY%"
 	},
 	outputs = {"%U%-%I%.a"},
 }
