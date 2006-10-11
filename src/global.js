@@ -1,10 +1,10 @@
-// Stolen wholesale from Wikipedia
+/* Stolen wholesale from Wikipedia */
 
 function showTocToggle()
 {
 	if (document.createTextNode)
 	{
-		// Uses DOM calls to avoid document.write + XHTML issues
+		/* Uses DOM calls to avoid document.write + XHTML issues */
 
 		var linkHolder = document.getElementById('toctitle')
 		if (!linkHolder)
@@ -34,7 +34,7 @@ function showTocToggle()
 
 function changeText(el, newText)
 {
-	// Safari work around
+	/* Safari work around */
 	if (el.innerText)
 		el.innerText = newText;
 	else if (el.firstChild && el.firstChild.nodeValue)

@@ -83,9 +83,7 @@
 						</div>
 					</xsl:if>
 
-					<script type="text/javascript">
-					  if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } 
-					</script>
+					<script type="text/javascript" src="{$DESTURL}/contents.js"></script>
 					
 					<xsl:apply-templates select="html/body/*"/>
 
