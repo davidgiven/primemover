@@ -84,9 +84,7 @@
 					</xsl:if>
 
 					<script type="text/javascript">
-					//<![CDATA[
-					 if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } 
-					//]]>
+					  if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } 
 					</script>
 					
 					<xsl:apply-templates select="html/body/*"/>
