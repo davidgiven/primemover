@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg1443"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   sodipodi:docbase="/home/dg/shared/workspace/pm-website/dat"
+   sodipodi:docname="dependencies.svg">
+  <defs
+     id="defs1445">
+    <desc
+       id="desc77">Slide</desc>
+    <desc
+       id="desc337">Drawing</desc>
+    <desc
+       id="desc81">Drawing</desc>
+    <desc
+       id="desc97">Drawing</desc>
+    <desc
+       id="desc113">Drawing</desc>
+    <desc
+       id="desc129">Drawing</desc>
+    <desc
+       id="desc145">Drawing</desc>
+    <desc
+       id="desc161">Drawing</desc>
+    <desc
+       id="desc177">Drawing</desc>
+    <desc
+       id="desc193">Drawing</desc>
+    <desc
+       id="desc209">Drawing</desc>
+    <desc
+       id="desc225">Drawing</desc>
+    <desc
+       id="desc241">Drawing</desc>
+    <desc
+       id="desc257">Drawing</desc>
+    <desc
+       id="desc273">Drawing</desc>
+    <desc
+       id="desc289">Drawing</desc>
+    <desc
+       id="desc305">Drawing</desc>
+    <desc
+       id="desc321">Drawing</desc>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#ffffff"
+     borderopacity="0.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="0"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="390.27652"
+     inkscape:cy="698.08457"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="822"
+     inkscape:window-height="550"
+     inkscape:window-x="0"
+     inkscape:window-y="0" />
+  <metadata
+     id="metadata1448">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       style="visibility:visible"
+       id="g85"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <g
+         id="g87"
+         style="font-size:635px;font-weight:400;font-family:Nimbus Sans L embedded">
+        <g
+           id="g89"
+           style="fill:#000000;stroke:none">
+          <text
+             id="text91">
+            <tspan
+               id="tspan93"
+               y="5837"
+               x="7372 7723 7901 8253 8604">a.out</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g
+       style="visibility:visible"
+       id="g101"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <g
+         id="g103"
+         style="font-size:635px;font-weight:400;font-family:Nimbus Sans L embedded">
+        <g
+           id="g105"
+           style="fill:#000000;stroke:none">
+          <text
+             id="text107">
+            <tspan
+               id="tspan109"
+               y="7875"
+               x="4287 4638 4990 5341 5519">one.o</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g
+       style="visibility:visible"
+       id="g117"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <g
+         id="g119"
+         style="font-size:635px;font-weight:400;font-family:Nimbus Sans L embedded">
+        <g
+           id="g121"
+           style="fill:#000000;stroke:none">
+          <text
+             id="text123">
+            <tspan
+               id="tspan125"
+               y="7837"
+               x="7354 7532 7989 8340 8518">two.o</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g
+       style="visibility:visible"
+       id="g133"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <g
+         id="g135"
+         style="font-size:635px;font-weight:400;font-family:Nimbus Sans L embedded">
+        <g
+           id="g137"
+           style="fill:#000000;stroke:none">
+          <text
+             id="text139">
+            <tspan
+               id="tspan141"
+               y="7875"
+               x="10372 10550 10901 11113 11464 11816 11993">three.o</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g
+       style="visibility:visible"
+       id="g149"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <g
+         id="g151"
+         style="font-size:635px;font-weight:400;font-family:Nimbus Sans L embedded">
+        <g
+           id="g153"
+           style="fill:#000000;stroke:none">
+          <text
+             id="text155">
+            <tspan
+               id="tspan157"
+               y="9837"
+               x="4372 4723 5075 5426 5604">one.c</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g
+       style="visibility:visible"
+       id="g165"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <g
+         id="g167"
+         style="font-size:635px;font-weight:400;font-family:Nimbus Sans L embedded">
+        <g
+           id="g169"
+           style="fill:#000000;stroke:none">
+          <text
+             id="text171">
+            <tspan
+               id="tspan173"
+               y="9875"
+               x="7372 7550 8007 8358 8536">two.c</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g
+       style="visibility:visible"
+       id="g181"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <g
+         id="g183"
+         style="font-size:635px;font-weight:400;font-family:Nimbus Sans L embedded">
+        <g
+           id="g185"
+           style="fill:#000000;stroke:none">
+          <text
+             id="text187">
+            <tspan
+               id="tspan189"
+               y="9875"
+               x="10431 10609 10960 11172 11523 11875 12052">three.c</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g
+       style="visibility:visible"
+       id="g197"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <g
+         id="g199"
+         style="font-size:635px;font-weight:400;font-family:Nimbus Sans L embedded">
+        <g
+           id="g201"
+           style="fill:#000000;stroke:none">
+          <text
+             id="text203">
+            <tspan
+               id="tspan205"
+               y="12337"
+               x="6872 7223 7363 7714 8066 8417 8557 8874 9052">globals.h</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+    <g
+       id="g213"
+       style="fill:#000000;stroke:none;visibility:visible"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path215"
+         d="M 8127,10173 L 8285,10620 L 7985,10626 L 8127,10173 z " />
+    </g>
+    <g
+       id="g217"
+       style="fill:none;stroke:#000000;visibility:visible;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path219"
+         d="M 8152,11597 L 8133,10533"
+         style="fill:none;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <g
+       style="visibility:visible"
+       id="g221"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+    <g
+       id="g229"
+       style="fill:#000000;stroke:none;visibility:visible"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path231"
+         d="M 11414,10173 L 11062,10491 L 10942,10216 L 11414,10173 z " />
+    </g>
+    <g
+       id="g233"
+       style="fill:none;stroke:#000000;visibility:visible;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path235"
+         d="M 8152,11597 L 11084,10317"
+         style="fill:none;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <g
+       style="visibility:visible"
+       id="g237"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+    <g
+       id="g245"
+       style="fill:#000000;stroke:none;visibility:visible"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path247"
+         d="M 5160,10135 L 5630,10198 L 5498,10467 L 5160,10135 z " />
+    </g>
+    <g
+       id="g249"
+       style="fill:none;stroke:#000000;visibility:visible;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path251"
+         d="M 8152,11597 L 5483,10293"
+         style="fill:none;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <g
+       style="visibility:visible"
+       id="g253"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+    <g
+       id="g261"
+       style="fill:#000000;stroke:none;visibility:visible"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path263"
+         d="M 5092,8173 L 5275,8611 L 4975,8633 L 5092,8173 z " />
+    </g>
+    <g
+       id="g265"
+       style="fill:none;stroke:#000000;visibility:visible;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path267"
+         d="M 5160,9097 L 5118,8532"
+         style="fill:none;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <g
+       style="visibility:visible"
+       id="g269"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+    <g
+       id="g277"
+       style="fill:#000000;stroke:none;visibility:visible"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path279"
+         d="M 8126,8135 L 8276,8585 L 7976,8585 L 8126,8135 z " />
+    </g>
+    <g
+       id="g281"
+       style="fill:none;stroke:#000000;visibility:visible;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path283"
+         d="M 8127,9135 L 8126,8495"
+         style="fill:none;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <g
+       style="visibility:visible"
+       id="g285"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+    <g
+       id="g293"
+       style="fill:#000000;stroke:none;visibility:visible"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path295"
+         d="M 11372,8173 L 11541,8616 L 11242,8629 L 11372,8173 z " />
+    </g>
+    <g
+       id="g297"
+       style="fill:none;stroke:#000000;visibility:visible;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path299"
+         d="M 11414,9135 L 11388,8533"
+         style="fill:none;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <g
+       style="visibility:visible"
+       id="g301"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+    <g
+       id="g309"
+       style="fill:#000000;stroke:none;visibility:visible"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path311"
+         d="M 8091,6135 L 7712,6420 L 7617,6135 L 8091,6135 z " />
+    </g>
+    <g
+       id="g313"
+       style="fill:none;stroke:#000000;visibility:visible;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path315"
+         d="M 5092,7135 L 7749,6249"
+         style="fill:none;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <g
+       style="visibility:visible"
+       id="g317"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+    <g
+       id="g325"
+       style="fill:#000000;stroke:none;visibility:visible"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path327"
+         d="M 8091,6135 L 8257,6579 L 7957,6590 L 8091,6135 z " />
+    </g>
+    <g
+       id="g329"
+       style="fill:none;stroke:#000000;visibility:visible;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158">
+      <path
+         id="path331"
+         d="M 8126,7097 L 8104,6495"
+         style="fill:none;stroke-width:35.27896346;stroke-miterlimit:4;stroke-dasharray:none" />
+    </g>
+    <g
+       style="visibility:visible"
+       id="g333"
+       transform="matrix(3.543188e-2,0,0,3.543188e-2,-147.2667,-18.33409)"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+    <path
+       style="fill:#000000;stroke:none;visibility:visible"
+       d="M 139.41264,199.04049 L 156.20735,198.61531 L 153.12478,208.78426 L 139.41264,199.04049 z "
+       id="path343"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+    <path
+       style="fill:none;stroke:#000000;visibility:visible"
+       d="M 255.66464,234.47237 L 151.60121,202.76084"
+       id="path347"
+       inkscape:export-filename="/home/dg/shared/workspace/pm-website/dat/dependencies.png"
+       inkscape:export-xdpi="94.962158"
+       inkscape:export-ydpi="94.962158" />
+  </g>
+</svg>

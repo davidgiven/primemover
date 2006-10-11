@@ -2,9 +2,9 @@
 	<page src="about.i"/>
 	<page src="faq.i"/>
 	<page src="manual/index.i">
-		<page src="manual/current/index.i">
-			<page src="manual/current/concepts.i"/>
-			<page src="manual/current/pmfiles.i"/>
-		</page>
+		<page src="manual/invocation.i"/>
+		<page src="manual/installation.i"/>
+		<page src="manual/pmfiles.i"/>
+		<page src="manual/c.i"/>
 	</page>
 </page>
