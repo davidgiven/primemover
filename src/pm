@@ -141,22 +141,8 @@ end
 
 -- Turn a list of strings into a single quoted string.
 
-local function renderinto(i, t)
-	if (type(i) == "table") then
-		for _, j in ipairs(i) do
-			renderinto(j, t)
-		end
-	else
-		if (i ~= nil) then
-			i = string_gsub(i, "\\", "\\\\")
-			i = string_gsub(i, '"', '\\"')
-			table_insert(t, i)
-		end
-	end
-end
-
 function rendertable(i)
-	if (type(i) == "string") then
+	if (type(i) == "string") or (type(i) == "number") then
 		return i
 	end
 	
@@ -165,7 +151,11 @@ function rendertable(i)
 	end
 	
 	local t = {}
-	renderinto(i, t)
+	for _, j in ipairs(i) do
+		local r = string_gsub(j, "\\", "\\\\")
+		r = string_gsub(r, '"', '\\"')
+		table_insert(t, r)
+	end
 	return '"'..table_concat(t, '" "')..'"'
 end
 local rendertable = rendertable
