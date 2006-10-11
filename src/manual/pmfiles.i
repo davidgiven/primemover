@@ -386,10 +386,10 @@ string expansion refers to itself, an infinite loop will result.</p>
   <code>text</code> is executed as a chunk of Lua code, and the return value
   is used as the result. The code uses a read-only copy of the pmfile's
   global environment with <code>self</code> set to the current rule. Rule
-  properties may be looked up by dereferencing the rule's table. For
-  example:</p>
+  properties may be looked up by calling the <code>__index()</code> method on
+  the rule. For example:</p>
   <pre>"the number is %{return 1 + 1}%"
-"CFILE is set to %{return self.CFILE}%"</pre>
+"CFILE is set to %{return self:__index('CFILE')}%"</pre>
 
   <p>When a property is looked up in this way, it uses the same mechanisms as
   string expansion, but the value is not converted into a string and remains
