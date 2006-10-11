@@ -1,0 +1,7 @@
+pm: creating new intermediate file cache in '.pm-cache'
+echo "one" "two" >> ".pm-cache/1"
+echo "three" >> ".pm-cache/1"
+echo "four" >> ".pm-cache/1"
+one two
+three
+four
