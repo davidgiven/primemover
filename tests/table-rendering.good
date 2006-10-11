@@ -1,0 +1,8 @@
+pm: creating new intermediate file cache in '.pm-cache'
+sh: -c: line 0: unexpected EOF while looking for matching `''
+sh: -c: line 1: syntax error: unexpected end of file
+pm: object 'file', defined at table-rendering.pm:16, failed to build with return code 512
+echo "foo" "bar" "baz" >> ".pm-cache/1"
+echo "foo'bar\"baz" >> ".pm-cache/1"
+echo foo'bar"baz >> ".pm-cache/1"
+rm -f ".pm-cache/1"
