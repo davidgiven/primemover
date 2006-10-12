@@ -50,6 +50,11 @@ div.nav-icons
 	text-align: center;
 }
 
+div.nav-icons img
+{
+	border: 0;
+}
+
 div.page-path
 {
 	margin: 0 0 0 10em;
@@ -156,10 +161,10 @@ div.bottom
 
 div.boxed > h4
 {
-	font-size: normal;
+	font-size: 100%;
 	text-align: center;
-	margin-bottom: 0 0.5em 0 0;
-	padding-bottom: 0 0.5em 0 0;
+	margin-bottom: 0.5em;
+	padding-bottom: 0.5em;
 	border-bottom: 1px solid #000;
 }
 
