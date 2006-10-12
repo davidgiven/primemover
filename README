@@ -1,17 +1,9 @@
-                             PRIME MOVER V0.1pre1
-                             ====================
+                               PRIME MOVER V0.1
+                               ================
 
-                                 Prerelease
-                            (C) 2005 David Given
-                                 2005-11-20
+                            (C) 2006 David Given
+                                 2006-10-12
 
-WARNING
-=======
-
-This is a *prerelease*. Documentation is poor. Stability is unproven. Bugs are
-unfound. APIs are unstable. Everything here is subject to change.
-
-Enjoy.
 
 INTRODUCTION
 ============
@@ -65,357 +57,63 @@ simply doing:
   
 ...and it will build.
 
-INSTALLATION
-============
 
-pm is deployed as a shell script that, when executed, bootstraps itself into
-a binary executable. This happens without the user's intervention; all it
-requires is a C compiler that can be invoked with:
+DOCUMENTATION & INSTRUCTIONS
+============================
 
-  cc -o outputfile inputfile.c
+The full documentation for Prime Mover is far out of the scope of this
+document. Instead, see the Prime Mover website:
 
-Two versions of the shell script are provided. These are functionally
-identical.
+http://primemover.sourceforge.net/manual/index.html
 
-pm_8bit is the recommended version. This is a binary file (it contains a
-    gzipped data block).
-    
-pm_7bit is an alternative version which is a plain text file, and so can be
-    deployed in diff files. It is about 30% larger than pm_8bit.
 
-To install, simply copy the appropriate file to whereever you think most
-suitable. I recommend your project's root directory, so that pm will be
-distributed along with your project.
+CONTENTS
+========
 
-This will give you the core pm functionality. However, you may also want to
-use one of the extension libraries in the lib directory. These provide
-support for building various types of file. These should be copied as well;
-the recommended location is the same directory as pm.
+As a Prime Mover user, you will want to look at the following directories
+in the distribution.
 
-lib/c.pm provides support for building C and C++ executables and static
-    libraries with gcc.
-
-To summarise:
-
-* Copy pm_8bit or pm_7bit into your project directory. Call it pm.
-* Copy any, all or none of the extension libraries in 'lib' into the same
-  directory.
-* You're done.
-
-To execute pm, simply run it.
-
-EXTREMELY BASIC DOCUMENTATION
-=============================
-
-A pmfile is a Lua script. When pm reads the script, it is executed; the script
-tells pm about what can be built, and how. Once pm has finished reading all
-the scripts, it will try to build it.
-
-A pmfile typically looks like this:
-
----start---
-include "library.pm"         -- Include any extension libraries
-
-VARIABLE = value             -- Define any variables (note capitalisation)
-
-target = clause {            -- 'target' should be built using the 'clause'
-                             -- rule (note capitalisation of 'target')
-
-    property = value,        -- Define any properties for 'clause'
-    VARIABLE = value,        -- Override any variables (note capitalisation)
-    
-    clause2 {                -- 'target' depends on 'clause2'
-    },
-    
-    clause { "filename" },   -- These two are equivalent (for simplicity)
-    clause "filename",
-
-    "filename",              -- Equivalent to 'file "filename"'
-
-    install = {...}          -- Execute this command once target is built
-}
----end---
-
-This is then invoked with:
-
-    ./pm -f <filename> <target>
-
-If '<filename>' is omitted, it defaults to 'pmfile'. If 'target' is omitted,
-it defaults to 'default'. Both multiple filenames and multiple targets may be
-specified.
-
-Variables vs properties
------------------------
-
-Variables begin with a capital letter. I recommend that you FULLY CAPITALISE
-THEM.
-
-Properties begin with a lower cause letter.
-
-Properties are used to control individual clauses; variables are used to
-control tree-fuls of clauses. Properties are looked up along the class
-hierarchy, variables are looked up along the call stack.
-
-The variable scoping can probably be clarified like this:
-
-  VAR = "1"
-  default = clause {
-    clause {
-      VAR = "2",
-      -- VAR will be "2" for this clause and any clause this one calls
-    },
-    clause {
-      VAR = "3",
-      -- VAR will be "3" for this clause and any clause this one calls
-    }
-    clause {
-      -- VAR will be "1" for this clause and any clause this one calls
-    }
-  }
-
-This is *not* simple lexical scoping. The following is perfectly
-acceptable.
-
-  x = clause {
-    ...
-  }
+  - bin: contains the Prime Mover executables themselves.
+  - lib: contains the standard plugins.
+  - examples: contains some example pmfiles.
+  - examples/source: source code used by the example pmfiles.
   
-  VAR = "1"
-  default = group {
-    group {
-      VAR = "2",
-      x
-    },
-    group {
-      VAR = "3",
-      x
-    },
-    group {
-      x
-    }
-  }
+If you wish to modify Prime Mover itself, you'll also need to know about
+these directories.
 
-This will invoke the x clause three times, with a different setting of VAR
-each time. This is particularly useful when cross-compiling...
+  - src: contains the Prime Mover source code itself.
+  - lua: contains the Lua interpreter source code.
+  - build-tools: contains some utilities used as part of the build process.
+  - tests: the unit tests that are run during the build process.
+  
+  
+WHY YOU DON'T NEED TO BUILD PRIME MOVER ITSELF
+==============================================
 
-  application = cprogram {...}
-  default = group {
-    group {
-      TARGET = "ix86",
-      application,
-      install = pm.install("application-ix86")
-    },
-    group {
-      TARGET = "arm",
-      application,
-      install = pm.install("application-arm")
-    }
-  }
- 
-Commands
---------
+Prime Mover is a cross platform application. As a result, the executables will
+run anywhere. This means that I can supply working versions with this archive,
+so that they can be used without needing to build them yourself. (This avoids
+any painful bootstrapping issues.)
 
-Occasionally pm will want to be told to execute shell commands; for example,
-the 'install' property will want to do this. This is done using a command
-list.
+You can find the Prime Mover executables in the bin directory.
 
-A command list is a Lua table of strings.
 
-    install = {
-      "command1",
-      "command2",
-      "command3"
-    }
-    
-When executed, pm will execute each item in turn. If any fail, pm will abort.
+WHY YOU MAY NEED TO BUILD PRIME MOVER AFTER ALL
+===============================================
 
-Commands are subject to variable expansion. This allows you to refer to
-variables and properties in the command. For example, the 'install' property
-usually takes a command list that looks like this:
+However, if you wish to modify Prime Mover --- that is, the core application,
+not the plugins --- you still need to know how to rebuild the Prime Mover
+executable.
 
-    install = {
-      "cp %out% outputfile"
-    }
+This is done using the 'build' script. This will rebuild all three
+executables, and then automatically run the unit tests. In order to build
+Prime Mover, you must have the following software available:
 
-Each sequence delimited by %...% is looked up on the current object. The
-result is inserted into the string. If the result is a table, it is
-treated as a list of filenames, and inserted as a sequence of space-seperated
-quoted strings. For example:
+  - Lua 5.0 or 5.1
+  - uuencode
+  - cobfusc (available in the cutils Debian package)
+  - the usual collection of Unix file and text utilities
 
-    list = {"one", "two", "three four"},
-    install = {"echo %list%"}
-    
-...will try to execute:
-
-    echo "one" "two" "three four"
-
-(Note that I recommend the use of pm.install to produce install's command
-list. See the main documentation for the install property.)
-
-Variable expansion
-------------------
-
-Most strings get any reference variables expanded. A reference looks like
-this:
-
-	%varname%
-	
-The reference will be replaced with the contents of the variable 'varname' in
-the context at which the reference was expanded. If the variable contains a
-table, the contents of the table will be expanded as a sequence of quoted
-strings.
-
-If the variable is a table, you may use an item selector as follows:
-
-	%varname[1-10]%
-	
-This pulls out elements 1 through 10 inclusive from the table. You may omit
-either end of the range, and you may specify a single item.
-
-The object file cache
----------------------
-
-pm stores all of its intermediate files in a cache directory --- by default
-this is '.pm-cache' (and can be changed by a command line switch).
-
-The intermediate files are all keyed according to the command that was used to
-generate them, and are held indefinitely. This means that if you compile a
-program with, say, CFLAGS="-O6", then as CFLAGS="-g" (causing a complete
-rebuild), and then again as CFLAGS="-O6", then nothing needs to be done as the
-object files from the previous build run are still there.
-
-If needed (or if it gets too big) it can be purged with the '-p' command line
-switch. This will, of course, cause a complete rebuild to be done.
-
-The pm core library
--------------------
-
-The following clauses and variables are provided out-of-the box.
-
-RM
-    Variable containing the command used to delete a file. "rm -f" by default.
-    
-node { ... }
-    Superclass of all clauses --- do not use directly. All the other
-    clauses inherit from this, so the properties described here apply
-    everywhere.
-    
-    install
-        Property containing a command list to be executed once the node
-        has been built. This will always be executed regardless of whether the
-        node has been built or not... which means that if the same node is
-        visited several times, with different parameters making it build
-        different executables, then if they're all copied to the same place
-        they'll be overwritten!
-        
-        This is typically used to copy files out of the intermediate cache
-        to make them visible to the user. As a result, there's a helper
-        function available to make this easy. To do this, use a line such
-        as:
-        
-            install = pm.install("path_to_destination_file")
-        
-        This will cause all the right things to happen to place that node's
-        result in path_to_destination_file, relative to the CWD when pm was
-        invoked.
-        
-        It is, however, still possible to use command lists in the normal
-        way (and pm.install can be used to generate one item in the list).
-        
-    dependencies
-        Property containing a list of nodes who should be built before
-        building the node, in *addition* to the node's children.
-        
-        This is used to specify dependency information where you don't
-        want the outputs to be used as the node's inputs. (For example,
-        if the build process refers to a file implicitly.)
-        
-file { ... }
-    Represents a static source file. May not contain only simple strings,
-    not other clauses.
-    
-group { ... }
-    Does nothing in of itself; only exists to provide something to group
-    together other clauses with.
-
-ith { ...}
-    Similar to group {}, but install of returning all of the output files
-    that its children returns, it returns only one.
-    
-    i
-        Property containing the index of the input to return as output.
-        
-simple { ... }
-    Builds files using a shell command.
-    
-    command
-        Property containing the command list to execute in order to build
-        the clause. %in% will be expanded to a list of input files; %out%
-        to a list of output files.
-    
-    outputs
-        Property containing a list of output patterns. This is used to
-        generate the names of the output files in the intermediate cache.
-        It should contain a set of strings of the form "%.c"; the % will
-        be expanded with a unique identifier.
-        
-The C extension library
------------------------
-
-c.pm contains some clauses useful for building C and C++ applications.
-
-CC
-    Variable containing the command used to compile a single C file.
-    "gcc %CFLAGS% -c -o %out% %in%" by default.
-    
-CXX
-    Variable containing the command used to compile a single C++ file.
-    "g++ %CXXFLAGS% -c -o %out% %in%" by default.
-
-CPROGRAM
-    Variable containing the command used to link a C or C++ application.
-    "gcc %CFLAGS% %CLINKFLAGS% -o %out% %in%" by default.
-    
-CDEPENDS
-    Variable containing the command used to generate C or C++ dependency
-    information.
-    "gcc %CFLAGS% -MM -MF %out% %in%" by default.
-    
-AR
-    Variable containing the command used to produce a static library.
-    "rm %out% && ar cr %out% %in%" by default.
-    
-CFLAGS
-    Variable containing the compiler flags used for C files.
-    "-g -Os" by default.
-    
-CXXFLAGS
-    Variable containing the compiler flags used for C++ files.
-    "-g -Os" by default.
-    
-CLINKFLAGS
-    Variable containing extra compiler flags used for linking executables.
-    "" by default.
-    
-cfile { ... }
-    Specialisation of 'simple'; builds object files from C source. cfile
-    supports one extra property:
-    
-    dynamicheaders
-        Property containing a list of nodes that will be built when the
-        cfile node is built, but whose results will *not* be used as the
-        cfile's inputs.
-        
-        This is intended to be used to generate header files that will
-        be used by the C source (hence the name). The nodes that build the
-        header files should use install to place them somewhere where the C
-        source can see them.
-    
-cprogram { ... }
-    Specialisation of 'simple'; builds executables from object files.
-    
-clibrary { ... }
-    Specialisation of 'simple'; builds static libraries from object files.
     
 ACKNOWLEDGEMENTS
 ================
@@ -424,6 +122,15 @@ The Lua directory contains patched versions of:
 
  - Lua 5.0.2
  - lposix for Lua 5.0 by Luiz Henrique de Figueiredo <lhf@tecgraf.puc-rio.br>
+
+
+THE AUTHOR
+==========
+
+Prime Mover was written by me, David Given. You may contact me at
+dg@cowlark.com, or visit my website at http://www.cowlark.com. There may or
+may not be anything interesting there.
+
 
 LICENSE
 =======
