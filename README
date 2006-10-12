@@ -10,8 +10,11 @@ INTRODUCTION
 
 Prime Mover (hereafter pm) is a build tool, similar to make, but (hopefully)
 more flexible and considerably more powerful. It is based on the Lua scripting
-language, so a knowledge of Lua will most likely be useful if you want to
-write pmfiles.
+language, but a knowledge of Lua is not required to use it.
+
+For a full description, and for the documentation, see the Prime Mover website:
+
+http://primemover.sourceforge.net
 
 pm supports:
 
@@ -65,6 +68,12 @@ The full documentation for Prime Mover is far out of the scope of this
 document. Instead, see the Prime Mover website:
 
 http://primemover.sourceforge.net/manual/index.html
+
+In particular, if you use Prime Mover, please join the mailing list. This will
+allow you to ask questions, hopefully receive answers, and get news about any
+new releases. You can subscribe or view the archives at the following page:
+
+https://lists.sourceforge.net/lists/listinfo/primemover-users
 
 
 CONTENTS
