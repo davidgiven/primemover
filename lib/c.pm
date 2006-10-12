@@ -1,3 +1,7 @@
+-- $Id$
+-- $HeadURL$
+-- $LastChangedDate$
+
 -- pm includefile to compile *host* C programs.
 
 -- Standard Lua boilerplate.
@@ -187,7 +191,7 @@ simple_with_clike_dependencies = simple {
 			for _, i in ipairs(self.dynamicheaders) do
 				local o = i:__build()
 				if o[1] then
-					table_insert(self.CDYNINCLUDES, string_gsub(o[1], "/[^/]*$", ""))
+					table_insert(self.CDYNINCLUDES, (string_gsub(o[1], "/[^/]*$", "")))
 				end
 			end
 		end
