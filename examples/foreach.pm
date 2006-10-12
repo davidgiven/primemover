@@ -4,14 +4,14 @@
 
 include "lib/c.pm"
 
-DIR = "examples/source-- $State: Exp $
-
-include "lib/c.pm"
-
-local d = "test-source/"
+DIR = "examples/source"
 
 default = cprogram {
-	-- foreach applies a rule to all of its inputs. The f"%DIR%/test.c",
+	-- foreach applies a rule to all of its inputs. The following is
+	-- equivalent to:
+	--
+	-- group {
+	--     cfile "%DIR%/test.c",
 	--     cfile "%DIR%/test1.c",
 	--     cfile "%DIR%/test2.c",
 	--     cfile "%DIR%/test3.c",
