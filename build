@@ -26,6 +26,7 @@ make_interpreter() {
 
 make_pm() {
 	echo "Making $3..."
+	mkdir -p bin
 	(
 		sed -e "s!%%%EXTRACTOR%%%!$2!" < src/shell
 		cat src/pm | sh -c "$1" | embed script
