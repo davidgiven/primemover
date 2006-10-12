@@ -1,6 +1,10 @@
--- $Id: shell 15 2006-07-25 09:21:06Z dtrg $
--- $Source: /cvsroot/tack/Ack/pmfile,v $
--- $State: Exp $
+-- $Id$
+-- $HeadURL$
+-- $LastChangedDate$
+
+include "lib/c.pm"
+
+DIR = "examples/source-- $State: Exp $
 
 include "lib/c.pm"
 
@@ -10,10 +14,11 @@ dynamic_outputs = simple {
 	outputs = {"%U%/first.c", "%U%/second.c", "%U%/third.c"},
 	command = {
 		"echo 'int foo() { return 1; }' > %out[1]%",
-		"echo 'int foo() { return 2; }' > %out[2]%",
-		"echo 'int foo() { return 3; }' > %out[3]%"
-	},
-	file (d.."test.c")
+		"echo 'int foo() { return 2; }' > %out[2"%DIR%/test.c"
+}
+
+default = cprogram {
+	cfile "%DIR%/test.c"le (d.."test.c")
 }
 
 default = cprogram {
@@ -25,8 +30,5 @@ default = cprogram {
 	-- outputs while ignoring the others.
 	
 	cfile {
-		ith { dynamic_outputs, i = 2 }
-	},
-	
-	install = pm.install("test-source/ith")
+	%DIR%/ith")
 }
