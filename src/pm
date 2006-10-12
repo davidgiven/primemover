@@ -256,6 +256,28 @@ function install(src, dest)
 	end
 end
 
+-- Perform an error traceback.
+
+local function traceback(e)
+	local i = 1
+	while true do
+		local t = debug.getinfo(i)
+		if not t then
+			break
+		end
+		if (t.short_src ~= "stdin") and (t.short_src ~= "[C]") then
+			if (t.currentline == -1) then
+				t.currentline = ""
+			end
+			message("  ", t.short_src, ":", t.currentline)
+		end
+		i = i + 1
+	end
+	
+	e = string_gsub(e, "^stdin:[0-9]*: ", "")
+	usererror("error: ", e)
+end
+
 -- ======================================================================= --
 --                            CACHE MANAGEMENT                             --
 -- ======================================================================= --
@@ -997,24 +1019,7 @@ function include(f, ...)
 		end,
 		function(e)
 			message("script execution error --- traceback follows:")
-			
-			local i = 1
-			while true do
-				local t = debug.getinfo(i)
-				if not t then
-					break
-				end
-				if (t.short_src ~= "stdin") and (t.short_src ~= "[C]") then
-					if (t.currentline == -1) then
-						t.currentline = ""
-					end
-					message("  ", t.short_src, ":", t.currentline)
-				end
-				i = i + 1
-			end
-			
-			e = string_gsub(e, "^stdin:[0-9]*: ", "")
-			usererror("script error: ", e)
+			traceback(e)
 		end
 	)
 end
@@ -1627,5 +1632,13 @@ for _, i in ipairs(targets) do
 		usererror("'", i, "' doesn't seem to be a valid target")
 	end
 
-	o:__build()
+	xpcall(
+		function()
+			o:__build()
+		end,
+		function(e)
+			message("rule engine execution error --- traceback follows:")
+			traceback(e)
+		end
+	)
 end
