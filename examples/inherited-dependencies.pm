@@ -22,7 +22,5 @@ default = cprogram {
 	cfile "%DIR%/test.c",
 	lib,
 	
-	install = pm.install("%DIR%ile (d.."test.c"),
-	lib,
-	
-	
+	install = pm.install("%DIR%/c-program-with-library")
+}
