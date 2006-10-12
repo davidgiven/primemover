@@ -1,6 +1,10 @@
--- $Id: shell 15 2006-07-25 09:21:06Z dtrg $
--- $Source: /cvsroot/tack/Ack/pmfile,v $
--- $State: Exp $
+-- $Id$
+-- $HeadURL$
+-- $LastChangedDate$
+
+include "lib/c.pm"
+
+DIR = "examples/source-- $State: Exp $
 
 include "lib/c.pm"
 
@@ -10,15 +14,11 @@ make_dynamic_h = simple {
 	command = {
 		"echo '#define DYNAMIC 4' > %out%"
 	},
-	outputs = {"%U%/dynamic.h"},
-}
-
-default = cprogram {
-	cfile (d.."test.c"),
+"%DIR%/test.c",
 	cfile {
-		d.."includes-dynamic.c",
+		"%DIR%/includes-dynamic.c",
 		dynamicheaders = make_dynamic_h,
 	},
 	
-	install = pm.install(d.."dynamic-header")
+	install = pm.install("%DIR%/dynamic-header")
 }
