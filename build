@@ -30,15 +30,15 @@ make_pm() {
 		sed -e "s!%%%EXTRACTOR%%%!$2!" < src/shell
 		cat src/pm | sh -c "$1" | embed script
 		make_interpreter | sh -c "$1" | embed interpreter
-	) > $3
-	chmod a+rx $3
+	) > bin/$3
+	chmod a+rx bin/$3
 }
 
 run_unit_test() {
 	echo "Running test $1..."
 	rm -f ERROR RESULT OUT DATA*
 	# Strange next line to prevent failures on error condition.
-	( ../pm_uncompressed -p -f "$1" &> ERROR ) && true
+	( ../bin/pm_uncompressed -p -f "$1" &> ERROR ) && true
 	touch OUT
 	[ -f ERROR ] && (cat ERROR >> OUT)
 	[ -f RESULT ] && (cat RESULT >> OUT)
@@ -54,7 +54,7 @@ make_pm "gzip -9c" "zcat" "pm_8bit"
 make_pm "gzip -9c | uuencode out" "uudecode -o /dev/stdout | zcat" "pm_7bit"
 
 cd tests
-../pm_uncompressed -p -f startup.pm
+../bin/pm_uncompressed -p -f startup.pm
 for n in *.pm; do
 	run_unit_test "$n"
 done
