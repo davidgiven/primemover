@@ -1,0 +1,13 @@
+Version 0.1.1
+-------------
+
+Bugfix release.
+
+- Added CHANGELOG and LICENSE files.
+- Fixed #1577432: c.pm rules weren't honouring {PARENT, ...} in some
+  circumstances.
+- Fixed #1577396: REDIRECT wasn't being exported and so wasn't available
+  for use by scripts.
+- Some portability tweaks.
+
+$Id$
