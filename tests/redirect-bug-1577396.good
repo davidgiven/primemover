@@ -1,0 +1,5 @@
+pm: creating new intermediate file cache in '.pm-cache'
+echo fnord >> ".pm-cache/1"
+echo fnord >> ".pm-cache/1"
+fnord
+fnord

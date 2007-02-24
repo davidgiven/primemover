@@ -982,6 +982,7 @@ table_merge(sandbox, {
 	
 	PARENT = PARENT,
 	EMPTY = EMPTY,
+	REDIRECT = REDIRECT,
 })
 
 -- Cause any reads from undefined keys in the sandbox to fail with an error.
