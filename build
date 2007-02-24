@@ -43,7 +43,7 @@ run_unit_test() {
 	touch OUT
 	[ -f ERROR ] && (cat ERROR >> OUT)
 	[ -f RESULT ] && (cat RESULT >> OUT)
-	if ! diff -uN OUT "${1/.pm/.good}"; then
+	if ! diff -uN OUT "${1%.pm}.good"; then
 		echo "Test failed"
 		exit 1
 	fi
