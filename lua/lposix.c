@@ -602,7 +602,7 @@ struct mytimes
  clock_t elapsed;
 };
 
-#define pushtime(L,x)		lua_pushnumber(L,((lua_Number)x)/CLK_TCK)
+#define pushtime(L,x)		lua_pushnumber(L,((lua_Number)x)/CLOCKS_PER_SEC)
 
 static int Ftimes(lua_State *L, int i, const void *data)
 {
