@@ -1,0 +1,3 @@
+pm: creating new intermediate file cache in '.pm-cache'
+gcc "-g"  "-I." "-I."   -c -o ".pm-cache/1-DATA.o" "DATA.c"
+gcc "-g"   -o ".pm-cache/2-1-DATA" ".pm-cache/1-DATA.o" 

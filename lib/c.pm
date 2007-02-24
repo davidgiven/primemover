@@ -162,7 +162,7 @@ simple_with_clike_dependencies = simple {
 	end,
 	
 	__dependencies = function(self, inputs, outputs)		
-		local cincludes = self.CINCLUDES
+		local cincludes = self:__index("CINCLUDES")
 		if (type(cincludes) == "string") then
 			cincludes = {cincludes}
 		end
