@@ -111,7 +111,7 @@ internal use by Prime Mover and should not be used.</p>
 
 <h2>Values</h2>
 
-<p>Values in pm can be of these three types:</p>
+<p>Values in pm can be of these four types:</p>
 <ul>
   <li>Strings</li>
   <li>Lists</li>
@@ -149,7 +149,7 @@ kind of empty list, used in string expansion.</p>
 property lookups.</p>
 
 <blockquote class="lua">
-  <p>Prime Mover lists are, obviously, Lua tables with only numeric items.</p>
+  <p>Prime Mover lists are, obviously, Lua tables with only numeric keys.</p>
 </blockquote>
 
 <h3>Booleans</h3>
