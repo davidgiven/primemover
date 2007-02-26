@@ -36,6 +36,11 @@
 
     <h1>News</h1>
 
+	<h2>2007-02-24</h2>
+	
+	<p>Released version 0.1.1. This is a bugfix release; <tt>{REDIRECT, ...}</tt> and
+	<tt>{PARENT, ...}</tt> weren't working under some circumstances.</p>
+	
     <h2>2006-10-12</h2>
 
     <p>First version released to the public!</p>
