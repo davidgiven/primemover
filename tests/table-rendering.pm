@@ -4,7 +4,7 @@
 -- Prime Mover is licensed under the MIT open source license. Search
 -- for 'MIT' in this file to find the full license text.
 --
--- $Id: basic.pm 53 2006-10-03 22:20:07Z dtrg $
+-- $Id$
 
 -- Create output files.
 io.open("DATA1", "w"):write("one\n")
@@ -24,7 +24,7 @@ default = simple {
 	install = pm.install("RESULT"),
 	testdata1 = {"foo", "bar", "baz"},
 	testdata2 = {"foo'bar\"baz"},
-	testdata3 = "foo'bar\"baz",
+	testdata3 = "foobarbaz",
 	testdata4 = EMPTY,
 	
 	test1,
