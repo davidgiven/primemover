@@ -178,6 +178,14 @@ simple_with_clike_dependencies = simple {
 			self:__error("could not determine the dependencies for ",
 				pm.rendertable({input}))
 		end
+		if self.dynamicheaders then
+			for _, i in ipairs(self.dynamicheaders) do
+				local o = i:__build()
+				if o[1] then
+					table_insert(depends, o[1])
+				end
+			end
+		end
 		if pm.verbose then
 			pm.message('"', input, '" appears to depend on ',
 				pm.rendertable(depends))
