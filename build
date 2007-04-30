@@ -39,7 +39,7 @@ run_unit_test() {
 	echo "Running test $1..."
 	rm -f ERROR RESULT OUT DATA*
 	# Strange next line to prevent failures on error condition.
-	( ../bin/pm_uncompressed -p -f "$1" &> ERROR ) && true
+	( ../bin/pm_uncompressed -p -f "$1" 2> ERROR 1>&2 ) && true
 	touch OUT
 	[ -f ERROR ] && (cat ERROR >> OUT)
 	[ -f RESULT ] && (cat RESULT >> OUT)
