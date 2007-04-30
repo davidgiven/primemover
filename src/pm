@@ -141,7 +141,7 @@ end
 
 -- Turn a list of strings into a single quoted string.
 
-function rendertable(i)
+function rendertable(i, tolerant)
 	if (type(i) == "string") or (type(i) == "number") then
 		return i
 	end
@@ -152,6 +152,14 @@ function rendertable(i)
 	
 	local t = {}
 	for _, j in ipairs(i) do
+		if (type(j) ~= "string") and (type(j) ~= "number") then
+			if tolerant then
+				j = "[object]"
+			else
+				error("attempt to expand a list containing an object")
+			end
+		end
+		
 		local r = string_gsub(j, "\\", "\\\\")
 		r = string_gsub(r, '"', '\\"')
 		table_insert(t, r)
@@ -750,7 +758,8 @@ function node:__build()
 --			message("comparing ", t, " with ", tt, " (", rendertable({i}), ")")
 			if (tt > t) then
 				if verbose then
-					message("rebuilding ", self.class, " because ", i, " newer than ", rendertable(outputs))
+					message("rebuilding ", self.class, " because ", i, " (", tt, ") newer than ",
+						rendertable(outputs), " (", t, ")")
 				end
 				rebuild = true
 				break
@@ -758,7 +767,7 @@ function node:__build()
 		end
 	end
 
-	if rebuild then			
+	if rebuild then
 		self:__dobuild(inputs, outputs)
 		filetouch(outputs)
 	end
