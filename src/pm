@@ -1097,7 +1097,7 @@ file = node {
  		end
  		
  		for i = 1, n do
- 			o[i] = inputs[i]
+ 			o[i] = self:__expand(inputs[i])
  		end
  		
  		return o
@@ -1468,7 +1468,7 @@ Options and targets may be specified in any order.
 		
 Prime Mover is licensed under the MIT open source license.
 
-Copyright © 2006 David Given
+Copyright © 2006-2007 David Given
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
