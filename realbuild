@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec ./build "`pwd`/src" "/home/groups/p/pr/primemover/htdocs" "http://primemover.sf.net"
