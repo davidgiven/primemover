@@ -1,7 +1,7 @@
 #!/bin/sh
-# $Id:c-program-with-library.pm 81 2006-10-12 20:43:53Z dtrg $
-# $HeadURL:https://svn.sourceforge.net/svnroot/primemover/pm/examples/c-program-with-library.pm $
-# $LastChangedDate:2006-10-12 20:43:53Z $
+# $Id$
+# $HeadURL$
+# $LastChangedDate$
 #
 # Script to build a distribution package.
 
@@ -19,95 +19,9 @@ fi
 
 ./build
 mkdir ../primemover-$1
-cp -a --parents \
-	./bin/pm_uncompressed \
-	./bin/pm_7bit \
-	./bin/pm_8bit \
-	./lib/c.pm \
-	./lua/lundump.c \
-	./lua/lundump.h \
-	./lua/lposix.c \
-	./lua/ldblib.c \
-	./lua/ldebug.c \
-	./lua/ldebug.h \
-	./lua/ldo.c \
-	./lua/ldo.h \
-	./lua/lgc.c \
-	./lua/lgc.h \
-	./lua/lua.c \
-	./lua/lua.h \
-	./lua/ltm.c \
-	./lua/ltm.h \
-	./lua/lvm.c \
-	./lua/lvm.h \
-	./lua/lcode.c \
-	./lua/lcode.h \
-	./lua/ldump.c \
-	./lua/lfunc.c \
-	./lua/lfunc.h \
-	./lua/lauxlib.c \
-	./lua/lauxlib.h \
-	./lua/lparser.c \
-	./lua/lparser.h \
-	./lua/lbaselib.c \
-	./lua/ltable.c \
-	./lua/ltable.h \
-	./lua/loadlib.c \
-	./lua/ltests.c \
-	./lua/ltablib.c \
-	./lua/lstate.c \
-	./lua/lstate.h \
-	./lua/lapi.c \
-	./lua/lapi.h \
-	./lua/lualib.h \
-	./lua/llex.c \
-	./lua/llex.h \
-	./lua/lmem.c \
-	./lua/lmem.h \
-	./lua/lzio.c \
-	./lua/lzio.h \
-	./lua/lopcodes.c \
-	./lua/lopcodes.h \
-	./lua/lobject.c \
-	./lua/lobject.h \
-	./lua/modemuncher.h \
-	./lua/lstring.c \
-	./lua/lstring.h \
-	./lua/lstrlib.c \
-	./lua/llimits.h \
-	./lua/liolib.c \
-	./src/pm \
-	./src/shell \
-	./tests/string-modifiers.good \
-	./tests/table-rendering.pm \
-	./tests/simple-c-program.pm \
-	./tests/startup.good \
-	./tests/misspelt-rule.pm \
-	./tests/special-property-forms.pm \
-	./tests/table-rendering.good \
-	./tests/special-property-forms.good \
-	./tests/simple-c-program.good \
-	./tests/startup.pm \
-	./tests/basic.good \
-	./tests/string-modifiers.pm \
-	./tests/misspelt-rule.good \
-	./tests/basic.pm \
-	./build-tools/collapse.lua \
-	./examples/complex-rules.pm \
-	./examples/simple-c-program.pm \
-	./examples/dynamic-header.pm \
-	./examples/complex-c-program.pm \
-	./examples/group.pm \
-	./examples/foreach.pm \
-	./examples/variable-expansion.pm \
-	./examples/c-program-with-library.pm \
-	./examples/ith.pm \
-	./examples/multiple-install.pm \
-	./examples/inherited-dependencies.pm \
-	./README \
-	./build \
-	\
-	../primemover-$1
+
+tar cf - . --exclude=.svn --exclude=".pm*" | (cd ../primemover-$1; tar xf -) 
+rm ../primemover-$1/mkdist
 
 (cd .. && tar cvf primemover-$1.tar.bz2 --bzip2 primemover-$1)
 
