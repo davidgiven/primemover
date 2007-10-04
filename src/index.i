@@ -36,6 +36,15 @@
 
     <h1>News</h1>
 
+	<h2>2007-09-05</h2>
+	
+	<p>Release version 0.1.2.1. This is a bugfix release; occasionally deep in a
+	hierarchy, things weren't being rebuilt when they should be (a combination of
+	cfile { dynamicheaders } not rebuilding the dynamicheaders, and file {} not
+	expanding its filename).</p>
+	
+	<p>(0.1.2 was a SVN tagging mistake and does not exist.)</p>
+	
 	<h2>2007-02-24</h2>
 	
 	<p>Released version 0.1.1. This is a bugfix release; <tt>{REDIRECT, ...}</tt> and
