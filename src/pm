@@ -1,7 +1,7 @@
 #!/usr/bin/lua
 -- Prime Mover
 --
--- © 2006 David Given.
+-- © 2006-2007 David Given.
 -- Prime Mover is licensed under the MIT open source license. Search
 -- for 'MIT' in this file to find the full license text.
 --
@@ -11,7 +11,7 @@
 --                                GLOBALS                                  --
 -- ======================================================================= --
 
-local VERSION = "0.1.1"
+local VERSION = "0.1.2.1"
 
 -- Fast versions of useful system variables.
 
@@ -1440,7 +1440,7 @@ setfenv(1, _G)
 
 do
 	local function do_help(opt)
-		message("Prime Mover version ", VERSION, " © 2006 David Given")
+		message("Prime Mover version ", VERSION, " © 2006-2007 David Given")
 		stdout:write([[
 Syntax: pm [<options...>] [<targets>]
 Options:
