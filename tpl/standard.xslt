@@ -89,7 +89,7 @@
 
 					<div class="body-copyright">
 						<p>
-							All content © 2000-2006 David Given unless otherwise
+							All content © 2000-2007 David Given unless otherwise
 							stated.
 						</p>
 					</div>
