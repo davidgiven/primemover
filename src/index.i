@@ -36,6 +36,12 @@
 
     <h1>News</h1>
 
+	<h2>2008-01-13</h2>
+	
+	<p>Release version 0.1.3. This is a bugfix release; %in% and %out% were
+	previously only being honoured in simple{} nodes. They are now honoured
+	in all nodes, which means they can be used from pm.install() calls.</p>
+	
 	<h2>2007-09-05</h2>
 	
 	<p>Release version 0.1.2.1. This is a bugfix release; occasionally deep in a
