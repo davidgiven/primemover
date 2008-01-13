@@ -734,12 +734,14 @@ function node:__build()
 	-- inputs. 
 	
 	local inputs = self:__buildchildren()
+ 	self["in"] = inputs
 	
 	-- Determine the node's outputs. This will usually be automatically
 	-- generated, in which case the name will depend on the overall environment ---
 	-- including the inputs.
 	
 	local outputs = self:__outputs(inputs)
+	self.out = outputs
 	
 	-- Get the current node's timestamp. If anything this node depends on is
 	-- newer than that, the node needs rebuilding.
@@ -1355,8 +1357,6 @@ simple = node {
  	-- Outputs are specified manually.
  	
  	__outputs = function(self, inputs)
- 		self["in"] = inputs
- 		
  		local input
  		if inputs then
  			input = inputs[1]
@@ -1370,6 +1370,9 @@ simple = node {
 
 		-- Construct an outputs array for use in the cache key. This mirrors
 		-- what the final array will be, but the unique ID is going to be 0.
+		-- Note that we're overriding %out% here; this is safe, because it
+		-- hasn't been set yet when __outputs is called, and is going to be
+		-- set to the correct value when this function exits.
 		
 		self.out = {}
 		self.U = 0
@@ -1407,8 +1410,6 @@ simple = node {
  	-- variable is set to the input files.
  	
  	__dobuild = function(self, inputs, outputs)
- 		self["in"] = inputs
- 		self.out = outputs
 		local r = self:__invoke(self.command, inputs, outputs)
 		if r then
 			if delete_output_files_on_error then
