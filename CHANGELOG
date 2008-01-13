@@ -1,3 +1,12 @@
+Version 0.1.3
+-------------
+
+Bugfix release.
+
+- Corrected a fault where %in% and %out% where only set correctly on simple
+  nodes, which meant you couldn't use %out% in a pm.install from, say, a
+  group.
+
 Version 0.1.2.1
 ---------------
 

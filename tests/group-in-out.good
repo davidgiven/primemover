@@ -1,0 +1,2 @@
+pm: creating new intermediate file cache in '.pm-cache'
+cat "DATA1" > ".pm-cache/1"

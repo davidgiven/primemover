@@ -28,8 +28,8 @@ make_pm() {
 	echo "Making $3..."
 	mkdir -p bin
 	(
-		sed -e "s!%%%EXTRACTOR%%%!$2!" < src/shell
-		cat src/pm | sh -c "$1" | embed script
+		sed -e "s!%%%EXTRACTOR%%%!$2!" < src/shell.sh
+		cat src/pm.lua | sh -c "$1" | embed script
 		make_interpreter | sh -c "$1" | embed interpreter
 	) > bin/$3
 	chmod a+rx bin/$3
