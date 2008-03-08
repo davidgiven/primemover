@@ -36,6 +36,11 @@
 /* dg: naughty, this was originally a .c file */
 #include "modemuncher.h"
 
+/* dg: Cygwin compatibility */
+#ifdef __CYGWIN__
+#define _SC_STREAM_MAX 0
+#endif
+
 static const char *filetype(mode_t m)
 {
 	if (S_ISREG(m))		return "regular";
