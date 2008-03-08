@@ -5,7 +5,7 @@
 # Prime Mover is licensed under the MIT open source license. To get the full
 # license text, run this file with the '--license' option.
 #
-# $Id$
+# $Id:shell.sh 115 2008-01-13 05:59:54Z dtrg $
 
 if [ -x "$(which arch 2>/dev/null)" ]; then
 	ARCH="$(arch)"
@@ -36,7 +36,7 @@ extract_section() {
 
 # If the bootstrap's built, run it.
 
-if [ "$PMEXEC" -nt $0 ]; then
+if [ "$PMEXEC" -nt "$0" ]; then
 	extract_section script | "$PMEXEC" /dev/stdin "$@"
 	exit $?
 fi
