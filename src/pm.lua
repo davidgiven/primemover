@@ -794,7 +794,13 @@ end
 
 -- Recursively expands any variables in a string.
 
+local PERCENT = "\aPERCENT\a"
 function node:__expand(s)
+	-- Convert empty %% sequences into a special sequence so they don't
+	-- confuse the matching algorithm.
+
+	s = string_gsub(s, "%%%%", PERCENT)
+
 	local searching = true
 	while searching do
 		searching = false
@@ -902,10 +908,10 @@ function node:__expand(s)
 		end)
 	end
 	
-	-- Any remaining %% sequences must be empty, and so convert them into
-	-- single % sequences.
+	-- Convert our saved PERCENT sequences back into singleton percentage
+	-- signs.
 	
-	s = string_gsub(s, "%%%%", "%")
+	s = string_gsub(s, PERCENT, "%%")
 	return s
 end
 
