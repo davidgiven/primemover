@@ -85,21 +85,21 @@ well.</p>
     </tr>
     <tr>
       <td><code>pm_uncompressed</code></td>
-      <td>285kB</td>
-      <td>81kB</td>
-      <td>71kB</td>
+      <td>178kB</td>
+      <td>63kB</td>
+      <td>58kB</td>
     </tr>
     <tr>
       <td><code>pm_8bit</code></td>
-      <td>112kB</td>
-      <td>81kB</td>
-      <td>82kB</td>
+      <td>63kB</td>
+      <td>63kB</td>
+      <td>64kB</td>
     </tr>
     <tr>
       <td><code>pm_7bit</code></td>
-      <td>82kB</td>
-      <td>85kB</td>
-      <td>84kB</td>
+      <td>87kB</td>
+      <td>66kB</td>
+      <td>66kB</td>
     </tr>
   </tbody>
 </table>
