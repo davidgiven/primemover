@@ -1,0 +1,3 @@
+pm: creating new intermediate file cache in '.pm-cache'
+echo % > ".pm-cache/1"
+%
