@@ -130,7 +130,7 @@ single quotation marks. The escape character is <code>\</code>, with
 <pre>"a string"
 'a string'
 "mustn't"
-'mustn\'t"
+'mustn\'t'
 "multiple\nlines"</pre>
 
 <h3>Lists</h3>
