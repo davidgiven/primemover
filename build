@@ -10,6 +10,7 @@
 set -e
 
 TEMPFILE=/tmp/build.$$
+INTERPRETER=$TEMPFILE.c
 
 embed() {
 	cat > $TEMPFILE
@@ -19,9 +20,22 @@ embed() {
 	echo ""
 }
 
+prepare_engine() {
+	(
+		cd lua
+		lua ../build-tools/collapse.lua *.c > $TEMPFILE.1.c
+		lua ../build-tools/tokenmapper.lua $TEMPFILE.1.c ../build-tools/safe-tokens.lst > $TEMPFILE.tokenmap
+		lua ../build-tools/ccruncher.lua $TEMPFILE.1.c $TEMPFILE.tokenmap > $TEMPFILE.c
+	)
+}
+
+make_engine() {
+	lua build-tools/luasrcdiet/LuaSrcDiet.lua --quiet src/pm.lua -o $TEMPFILE.lua
+	cat $TEMPFILE.lua
+}
+	
 make_interpreter() {
-	cd lua
-	lua ../build-tools/collapse.lua *.c | cobfusc -dem
+	cat $TEMPFILE.c
 }
 
 make_pm() {
@@ -29,7 +43,7 @@ make_pm() {
 	mkdir -p bin
 	(
 		sed -e "s!%%%EXTRACTOR%%%!$2!" < src/shell.sh
-		cat src/pm.lua | sh -c "$1" | embed script
+		make_engine | sh -c "$1" | embed script
 		make_interpreter | sh -c "$1" | embed interpreter
 	) > bin/$3
 	chmod a+rx bin/$3
@@ -49,6 +63,9 @@ run_unit_test() {
 	fi
 	rm -f ERROR RESULT OUT DATA*
 }
+
+echo "Crunching interpreter..."
+prepare_engine
 
 make_pm "cat" "cat" "pm_uncompressed"
 make_pm "gzip -9c" "zcat" "pm_8bit"
