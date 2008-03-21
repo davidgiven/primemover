@@ -5,6 +5,15 @@
 --
 -- Extracts a list of tokens (and frequencies) from a C file.
 --
+-- To use:
+--
+--   lua tokenfetcher.lua -- <infile.c>
+--
+-- The result is written to stdout.
+--
+-- You can use the output of this file to generate a safetokens list for
+-- tokenmapper.lua.
+--
 -- David Given dg@cowlark.com
 --
 -- $Id$

@@ -6,6 +6,15 @@
 -- tokenmapper is a simple tool that will analyse a C file and determine how
 -- to transform it to make it smaller, by search-and-replacing tokens.
 --
+-- To use:
+--
+--   lua tokenmapper.lua -- <infile.c> <safetokens>
+--
+-- The mapfile will be written to stdout. (See ccruncher.lua.) <safetokens>
+-- is a plain text file containing, one per line, a list of tokens that are
+-- safe to rename without changing the program semantics. See
+-- tokenfetcher.lua.
+--
 -- David Given dg@cowlark.com
 --
 -- $Id$
@@ -134,5 +143,3 @@ for _, v in ipairs(map) do
 		nexttoken()
 	end
 end
-
---print(datafile)
