@@ -2,7 +2,7 @@
                               ==================
 
                             (C) 2008 David Given
-                                 2008-01-13
+                                 2008-03-21
 
 
 INTRODUCTION
@@ -120,18 +120,20 @@ Prime Mover, you must have the following software available:
 
   - Lua 5.0 or 5.1
   - uuencode
-  - cobfusc (available in the cutils Debian package)
   - the usual collection of Unix file and text utilities
 
     
 ACKNOWLEDGEMENTS
 ================
 
-The Lua directory contains patched versions of:
+The lua directory contains patched versions of:
 
  - Lua 5.0.2
  - lposix for Lua 5.0 by Luiz Henrique de Figueiredo <lhf@tecgraf.puc-rio.br>
 
+The build-tools directory contains (among other things written by me):
+
+ - LuaSrcDiet by Kein-Hong Man <khman@users.sf.net> 
 
 THE AUTHOR
 ==========

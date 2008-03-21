@@ -26,5 +26,5 @@ rm ../primemover-$1/mkdist
 (cd .. && tar cvf primemover-$1.tar.bz2 --bzip2 primemover-$1)
 
 echo ""
-echo "Done --- but did you remember to update the version number in the README?"
+echo "Done --- but did you remember to update the version number in the README and pm.lua?"
 
