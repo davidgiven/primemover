@@ -796,11 +796,6 @@ end
 
 local PERCENT = "\aPERCENT\a"
 function node:__expand(s)
-	-- Convert empty %% sequences into a special sequence so they don't
-	-- confuse the matching algorithm.
-
-	s = string_gsub(s, "%%%%", PERCENT)
-
 	local searching = true
 	while searching do
 		searching = false
@@ -836,6 +831,15 @@ function node:__expand(s)
 		s = string_gsub(s, "%%(.-)%%", function (varname)
 			searching = true
 
+			-- Empty sequences become the magic PERCENT sequence. These get
+			-- processed into literal % symbols at the end. We don't do it
+			-- here, because otherwise the string expansion code gets very
+			-- confused because it sees unmatched % signs.
+			
+			if (varname == "") then
+				return PERCENT
+			end
+			
 			-- Parse the string reference.
 			
 			local _, _, leftcolon, rightcolon = string_find(varname, "([^:]*):?(.*)$")
