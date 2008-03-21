@@ -3,7 +3,15 @@
 -- © 2008 David Given.
 -- This file is licensed under the MIT open source license.
 --
--- Extracts whitespace and rename tokens in a C file..
+-- Extracts whitespace and renames tokens in a C file.
+-- 
+-- To use:
+-- 
+--   lua ccruncher.lua -- <infile.c> <tokenmap>
+--
+-- The result is writen to stdout. <tokenmap> is a mapfile describing which
+-- tokens should be renamed; plain text, each pair of lines containing from
+-- and to. tokenmapper.lua generates one of these.
 --
 -- David Given dg@cowlark.com
 --
