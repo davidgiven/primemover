@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
@@ -396,6 +396,9 @@ string expansion refers to itself, an infinite loop will result.</p>
   a table or raw value. (This means that <code>{PARENT, ...}</code> and
   <code>{REDIRECT, ...}</code> are honoured.)</p>
 </blockquote>
+
+<p>If you want a literal <code>%</code> in a string, then use
+<code>%%</code>. (Only in version 0.1.4 and above.)</p>
 
 <h2>Property lookup</h2>
 
@@ -831,7 +834,7 @@ rule will be automatically removed.</p>
 <h4>Recognised properties</h4>
 <dl>
   <dt><var>outputs</var></dt>
-    <dd>A list of strings describing the output files this rule makes.
+    <dd>A list of strings describing the output files this rule makes. 
       <p>Each string describes the name of a file in the intermediate cache.
       String expansion is performed, but you may only use <code>%in%</code>,
       <code>%I%</code> and <code>%U%</code>. <code>%in%</code> expands to the
@@ -849,7 +852,7 @@ rule will be automatically removed.</p>
     </dd>
   <dt><var>command</var></dt>
     <dd>A string, or a list of strings, containing the commands to be
-      executed when building this rule.
+      executed when building this rule. 
       <p>Commands are executed via the standard shell (<code>/bin/sh</code>
       on most platforms). If multiple commands are provided, then they are
       glued together with <code>&amp;&amp;</code> before being executed.
