@@ -40,11 +40,29 @@ make_interpreter() {
 
 make_pm() {
 	echo "Making $3..."
+	
+	sed -e "s!XXXEXTRACTORXXX!$2!" < src/shell.sh > $TEMPFILE.stub
+	stat -t $TEMPFILE.stub > $TEMPFILE
+	read _ stubsize _ < $TEMPFILE
+	
+	make_engine | sh -c "$1" > $TEMPFILE.engine
+	stat -t $TEMPFILE.engine > $TEMPFILE
+	read _ enginesize _ < $TEMPFILE
+	
+	make_interpreter | sh -c "$1" > $TEMPFILE.interpreter
+	stat -t $TEMPFILE.interpreter > $TEMPFILE
+	read _ interpretersize _ < $TEMPFILE
+	
 	mkdir -p bin
 	(
-		sed -e "s!%%%EXTRACTOR%%%!$2!" < src/shell.sh
-		make_engine | sh -c "$1" | embed script
-		make_interpreter | sh -c "$1" | embed interpreter
+		i=$(expr $stubsize + $enginesize)
+		sed -e "s!XXXXLO!$(printf '%-6d' $stubsize)!" \
+		    -e "s!XXXXLS!$(printf '%-6d' $enginesize)!" \
+		    -e "s!XXXXCO!$(printf '%-6d' $i)!" \
+		    -e "s!XXXXCS!$(printf '%-6d' $interpretersize)!" \
+		    < $TEMPFILE.stub
+		cat $TEMPFILE.engine
+		cat $TEMPFILE.interpreter
 	) > bin/$3
 	chmod a+rx bin/$3
 }
