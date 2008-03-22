@@ -5,6 +5,8 @@
 # Prime Mover is licensed under the MIT open source license. To get the full
 # license text, run this file with the '--license' option.
 #
+# WARNING: this file contains hard-coded offsets --- do not edit!
+#
 # $Id:shell.sh 115 2008-01-13 05:59:54Z dtrg $
 
 if [ -x "$(which arch 2>/dev/null)" ]; then
@@ -18,7 +20,6 @@ else
 	ARCH=unknown
 fi
 	
-THISFILE="$0"
 PMEXEC="./.pm-exec-$ARCH"
 set -e
 
@@ -27,17 +28,13 @@ CFILE=/tmp/pm-$$.c
 trap "rm -f $GZFILE $CFILE" EXIT
 
 extract_section() {
-	sed -e "1,/^XXXXSTART$1/d" "$THISFILE" | (
-		read size
-		dd bs=1 count=$size 2> /dev/null
-	) > $GZFILE
-	cat $GZFILE | %%%EXTRACTOR%%%
+	dd skip=$1 count=$2 bs=1 if="$0" 2>/dev/null | XXXEXTRACTORXXX
 }
 
 # If the bootstrap's built, run it.
 
 if [ "$PMEXEC" -nt "$0" ]; then
-	extract_section script | "$PMEXEC" /dev/stdin "$@"
+	extract_section XXXXLO XXXXLS | "$PMEXEC" /dev/stdin "$@"
 	exit $?
 fi
 
@@ -51,9 +48,8 @@ else
 	CC="cc"
 fi
 
-extract_section interpreter > /tmp/pm-$$.c
-$CC $CFILE -o "$PMEXEC" && exec "$THISFILE" "$@"
+extract_section XXXXCO XXXXCS > /tmp/pm-$$.c
+$CC $CFILE -o "$PMEXEC" && exec "$0" "$@"
 
 echo "pm: bootstrap failed."
 exit 1
-
