@@ -509,12 +509,14 @@ static int Pttyname(lua_State *L)		/** ttyname(fd) */
 	return 1;
 }
 
+#if defined L_ctermid
 static int Pctermid(lua_State *L)		/** ctermid() */
 {
 	char b[L_ctermid];
 	lua_pushstring(L, ctermid(b));
 	return 1;
 }
+#endif
 
 
 static int Pgetlogin(lua_State *L)		/** getlogin() */
@@ -769,7 +771,9 @@ static const luaL_reg R[] =
 	{"chdir",		Pchdir},
 	{"chmod",		Pchmod},
 	{"chown",		Pchown},
+#if defined L_ctermid
 	{"ctermid",		Pctermid},
+#endif
 	{"dir",			Pdir},
 	{"errno",		Perrno},
 	{"exec",		Pexec},
