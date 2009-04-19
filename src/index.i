@@ -26,7 +26,7 @@ download site</a>.</p>
 <h1>Documentation</h1>
 
 <p>Read <a href="manual/index.html">the friendly manual</a>. You may also <a
-href="http://sourceforge.net/mailarchive/forum.php?forum_id=49184">join the
+href="http://sourceforge.net/mail/?group_id=157791">join the
 happy mailing list</a>.</p>
 
 <h1>News</h1>
