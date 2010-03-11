@@ -42,16 +42,16 @@ make_pm() {
 	echo "Making $3..."
 	
 	sed -e "s!XXXEXTRACTORXXX!$2!" < src/shell.sh > $TEMPFILE.stub
-	stat -t $TEMPFILE.stub > $TEMPFILE
-	read _ stubsize _ < $TEMPFILE
+	wc -c $TEMPFILE.stub > $TEMPFILE
+	read stubsize _ < $TEMPFILE
 	
 	make_engine | sh -c "$1" > $TEMPFILE.engine
-	stat -t $TEMPFILE.engine > $TEMPFILE
-	read _ enginesize _ < $TEMPFILE
+	wc -c $TEMPFILE.engine > $TEMPFILE
+	read enginesize _ < $TEMPFILE
 	
 	make_interpreter | sh -c "$1" > $TEMPFILE.interpreter
-	stat -t $TEMPFILE.interpreter > $TEMPFILE
-	read _ interpretersize _ < $TEMPFILE
+	wc -c $TEMPFILE.interpreter > $TEMPFILE
+	read interpretersize _ < $TEMPFILE
 	
 	mkdir -p bin
 	(
