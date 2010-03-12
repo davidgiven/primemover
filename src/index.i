@@ -31,6 +31,12 @@ happy mailing list</a>.</p>
 
 <h1>News</h1>
 
+<h2>2010-03-12</h2>
+
+<p>Released version 0.1.5. (Two years since the last update doesn't mean <i>dead</i>,
+it means <i>stable</i>!) Prime Mover now works on Interix, a.k.a. Microsoft Unix,
+a.k.a. Services for Unix, a.k.a. Subsystem For Unix.</p>
+
 <h2>2008-03-21</h2>
 
 <p>Released version 0.1.4. This is an enhancement release; Prime Mover now works on Cygwin;
