@@ -1,3 +1,9 @@
+Version 0.1.6
+-------------
+
+- Work around a conflict on eglibc ARM devices caused by eglibc defining
+  symbols R0, R1, R2 etc in <sys/ucontext.h>.
+
 Version 0.1.5
 -------------
 
