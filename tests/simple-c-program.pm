@@ -8,6 +8,8 @@ include "../lib/c.pm"
 io.open("DATA.c", "w"):write([[
 int main(int argc, char* argv[]) { return 0; }
 ]])
+collectgarbage()
+collectgarbage()
 
 default = cprogram {
 	cfile "DATA.c",
