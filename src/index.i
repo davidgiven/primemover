@@ -31,6 +31,12 @@ happy mailing list</a>.</p>
 
 <h1>News</h1>
 
+<h2>2011-08-26</h2>
+
+<p>Released version 0.1.6.1. Fixed a problem where Prime Mover would fail to
+bootstrap on eglibc ARM platforms; also fixed a bug where the tests would
+erroneously fail on some configurations.</p>
+
 <h2>2010-03-12</h2>
 
 <p>Released version 0.1.5. (Two years since the last update doesn't mean <i>dead</i>,
