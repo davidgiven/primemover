@@ -94,7 +94,7 @@ local t1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 local lt1 = string_len(t1)
 local t2 = "_0123456789"
 local lt2 = string_len(t2)
-local t3 = t1 .. t2
+local t3 = t1 .. t2 .. "R"
 local lt3 = string_len(t3)
 
 local function charof(s, n)
