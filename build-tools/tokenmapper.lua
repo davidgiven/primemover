@@ -90,7 +90,7 @@ table.sort(map, function(e1, e2)
 end)
 
 local tokennumber = 0
-local t1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+local t1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQSTUVWXYZ"
 local lt1 = string_len(t1)
 local t2 = "_0123456789"
 local lt2 = string_len(t2)
