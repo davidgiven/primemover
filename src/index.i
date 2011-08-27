@@ -31,6 +31,11 @@ happy mailing list</a>.</p>
 
 <h1>News</h1>
 
+<h2>2011-08-27</h2>
+
+<p>Released version 0.1.6.2. This fixes a stupid typo in 0.1.6.1 that
+mysteriously made it through testing...</p>
+
 <h2>2011-08-26</h2>
 
 <p>Released version 0.1.6.1. Fixed a problem where Prime Mover would fail to
