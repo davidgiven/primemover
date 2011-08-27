@@ -11,7 +11,7 @@
 --                                GLOBALS                                  --
 -- ======================================================================= --
 
-local VERSION = "0.1.6.1"
+local VERSION = "0.1.6.2"
 
 -- Fast versions of useful system variables.
 
