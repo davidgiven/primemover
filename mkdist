@@ -20,7 +20,7 @@ fi
 ./build
 mkdir ../primemover-$1
 
-tar cf - . --exclude=.svn --exclude=".pm*" | (cd ../primemover-$1; tar xf -) 
+tar cf - . --exclude=.svn --exclude=.hg --exclude=".pm*" | (cd ../primemover-$1; tar xf -) 
 rm ../primemover-$1/mkdist
 
 (cd .. && tar cvf primemover-$1.tar.bz2 --bzip2 primemover-$1)
